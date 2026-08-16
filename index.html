@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFH Sessions - Gantt Chart (FY 2026-27)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #ffffff;
+            padding: 32px;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 32px;
+        }
+
+        .gantt-wrapper {
+            position: relative;
+            overflow-x: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+
+        svg {
+            display: block;
+            font-size: 13px;
+        }
+
+        .axis-label {
+            font-size: 13px;
+            fill: #1a1a1a;
+            font-weight: 500;
+        }
+
+        .task-label {
+            font-size: 13px;
+            fill: #1a1a1a;
+        }
+
+        .group-label {
+            font-size: 12px;
+            fill: #666666;
+            font-weight: 500;
+        }
+
+        .grid-line {
+            stroke: #e8e8e8;
+            stroke-width: 1;
+        }
+
+        .month-separator {
+            stroke: #d0d0d0;
+            stroke-width: 2;
+        }
+
+        .bar-group {
+            cursor: pointer;
+        }
+
+        .bar {
+            rx: 4;
+            ry: 4;
+            transition: fill 0.2s ease, filter 0.2s ease;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.05));
+        }
+
+        .bar:hover {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+        }
+
+        /* Hotel - Blue */
+        .bar.hotel { fill: #2563eb; }
+        .bar.hotel:hover { fill: #1d4ed8; }
+
+        /* Restaurants - Green */
+        .bar.restaurants { fill: #059669; }
+        .bar.restaurants:hover { fill: #047857; }
+
+        /* Spa - Pink */
+        .bar.spa { fill: #db2777; }
+        .bar.spa:hover { fill: #be185d; }
+
+        /* Support - Amber */
+        .bar.support { fill: #f59e0b; }
+        .bar.support:hover { fill: #d97706; }
+
+        /* Group - Purple */
+        .bar.group { fill: #7c3aed; }
+        .bar.group:hover { fill: #6d28d9; }
+
+        .tooltip {
+            position: absolute;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 10;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 24px;
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+
+        .date-range {
+            font-size: 12px;
+            color: #999999;
+            margin-bottom: 16px;
+        }
+
+        .group-section {
+            margin-bottom: 8px;
+            padding: 4px 0;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .group-section:first-child {
+            border-top: none;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BFH Sessions Timeline</h1>
+        <p class="subtitle">Fiscal Year 2026–27 (July 2026 – June 2027) — Grouped by Business Unit</p>
+
+        <div class="date-range">
+            Current scheduled sessions: August – September 2026
+        </div>
+
+        <div class="gantt-wrapper">
+            <svg id="gantt" width="1200" height="500"></svg>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #2563eb;"></div>
+                <span>Hotel</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #059669;"></div>
+                <span>Restaurants</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #db2777;"></div>
+                <span>Spa</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #f59e0b;"></div>
+                <span>Support</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #7c3aed;"></div>
+                <span>Group</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        const data = [
+            {
+                id: 1,
+                group: "Hotel",
+                name: "Check-in: Neilen & Malcolm",
+                start: new Date(2026, 7, 5),
+                end: new Date(2026, 7, 5),
+                unit: "hotel",
+                participants: "Neilen Tolmay"
+            },
+            {
+                id: 2,
+                group: "Hotel",
+                name: "Playbook Training – Accountability Deck",
+                start: new Date(2026, 7, 28),
+                end: new Date(2026, 7, 28),
+                unit: "hotel",
+                participants: "Marguerite Wiseman"
+            },
+            {
+                id: 3,
+                group: "Restaurants",
+                name: "New Starters – Session 1",
+                start: new Date(2026, 7, 19),
+                end: new Date(2026, 7, 20),
+                unit: "restaurants",
+                participants: "Kerry Kilpin, Natalie Wells, Imaan Bardien"
+            },
+            {
+                id: 4,
+                group: "Restaurants",
+                name: "Playbook – Session 1",
+                start: new Date(2026, 7, 19),
+                end: new Date(2026, 7, 19),
+                unit: "restaurants",
+                participants: "Tryn & Bistro teams"
+            },
+            {
+                id: 5,
+                group: "Restaurants",
+                name: "New Starters – Session 2",
+                start: new Date(2026, 7, 26),
+                end: new Date(2026, 7, 27),
+                unit: "restaurants",
+                participants: "Kerry Kilpin, Natalie Wells, Imaan Bardien"
+            },
+            {
+                id: 6,
+                group: "Restaurants",
+                name: "Playbook – Session 2",
+                start: new Date(2026, 7, 26),
+                end: new Date(2026, 7, 26),
+                unit: "restaurants",
+                participants: "Tryn & Bistro teams"
+            },
+            {
+                id: 7,
+                group: "Restaurants",
+                name: "New Starters – Session 3",
+                start: new Date(2026, 8, 9),
+                end: new Date(2026, 8, 10),
+                unit: "restaurants",
+                participants: "Kerry Kilpin, Natalie Wells, Imaan Bardien"
+            },
+            {
+                id: 8,
+                group: "Restaurants",
+                name: "Playbook – Session 3",
+                start: new Date(2026, 8, 9),
+                end: new Date(2026, 8, 9),
+                unit: "restaurants",
+                participants: "Tryn & Bistro teams"
+            }
+        ];
+
+        // Sort by group, then by date
+        const groupOrder = { "Hotel": 0, "Restaurants": 1, "Spa": 2, "Support": 3, "Group": 4 };
+        data.sort((a, b) => {
+            const groupDiff = groupOrder[a.group] - groupOrder[b.group];
+            if (groupDiff !== 0) return groupDiff;
+            return a.start - b.start;
+        });
+
+        const svg = document.getElementById("gantt");
+        const margin = { top: 40, right: 20, bottom: 40, left: 280 };
+        const width = 1200;
+        const height = 500;
+        const chartWidth = width - margin.left - margin.right;
+        const chartHeight = height - margin.top - margin.bottom;
+
+        // Calculate date range
+        const allDates = data.flatMap(d => [d.start, d.end]);
+        const minDate = new Date(Math.min(...allDates));
+        const maxDate = new Date(Math.max(...allDates));
+
+        // Extend range by a few days on each side for padding
+        minDate.setDate(minDate.getDate() - 2);
+        maxDate.setDate(maxDate.getDate() + 2);
+
+        const daysDiff = Math.ceil((maxDate - minDate) / (1000 * 60 * 60 * 24));
+        const pixelsPerDay = chartWidth / daysDiff;
+
+        // Helper function to get x position for a date
+        function getXPosition(date) {
+            const days = Math.floor((date - minDate) / (1000 * 60 * 60 * 24));
+            return margin.left + days * pixelsPerDay;
+        }
+
+        // Draw background grid and month lines
+        for (let i = 0; i <= daysDiff; i++) {
+            const date = new Date(minDate);
+            date.setDate(date.getDate() + i);
+            const x = margin.left + i * pixelsPerDay;
+
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x);
+            line.setAttribute("y1", margin.top);
+            line.setAttribute("x2", x);
+            line.setAttribute("y2", height - margin.bottom);
+            line.setAttribute("class", "grid-line");
+            svg.appendChild(line);
+
+            if (date.getDate() === 1 && i > 0) {
+                line.setAttribute("class", "month-separator");
+            }
+        }
+
+        // Draw date labels at top
+        for (let i = 0; i <= daysDiff; i++) {
+            const date = new Date(minDate);
+            date.setDate(date.getDate() + i);
+
+            if (date.getDate() === 1 || i === 0 || i === daysDiff) {
+                const x = margin.left + i * pixelsPerDay;
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", x);
+                text.setAttribute("y", margin.top - 12);
+                text.setAttribute("text-anchor", "middle");
+                text.setAttribute("class", "axis-label");
+
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                text.textContent = `${monthNames[date.getMonth()]} ${date.getDate()}`;
+                svg.appendChild(text);
+            }
+        }
+
+        // Draw task bars with group headers
+        const rowHeight = chartHeight / data.length;
+        let lastGroup = null;
+        let groupStartIndex = 0;
+
+        data.forEach((task, index) => {
+            const y = margin.top + index * rowHeight + rowHeight / 2;
+
+            // Draw group label if group changed
+            if (task.group !== lastGroup) {
+                const groupLabelX = margin.left - 12;
+                const groupLabelY = margin.top + index * rowHeight + 12;
+
+                const groupLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                groupLabel.setAttribute("x", groupLabelX);
+                groupLabel.setAttribute("y", groupLabelY);
+                groupLabel.setAttribute("text-anchor", "end");
+                groupLabel.setAttribute("class", "group-label");
+                groupLabel.textContent = task.group;
+                svg.appendChild(groupLabel);
+
+                lastGroup = task.group;
+            }
+
+            const startX = getXPosition(task.start);
+            const endX = getXPosition(task.end);
+            const barWidth = Math.max(endX - startX, 8);
+
+            // Draw task label
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", margin.left - 12);
+            label.setAttribute("y", y + 4);
+            label.setAttribute("text-anchor", "end");
+            label.setAttribute("class", "task-label");
+            label.textContent = task.name;
+            svg.appendChild(label);
+
+            // Draw bar
+            const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            bar.setAttribute("x", startX);
+            bar.setAttribute("y", y - 12);
+            bar.setAttribute("width", barWidth);
+            bar.setAttribute("height", 24);
+            bar.setAttribute("class", `bar ${task.unit}`);
+            bar.setAttribute("data-id", task.id);
+
+            bar.addEventListener("mouseenter", (e) => showTooltip(e, task));
+            bar.addEventListener("mouseleave", hideTooltip);
+
+            svg.appendChild(bar);
+        });
+
+        // Adjust SVG height to fit all bars
+        const actualHeight = margin.top + data.length * rowHeight + margin.bottom;
+        svg.setAttribute("height", actualHeight);
+
+        // Tooltip functionality
+        const tooltip = document.getElementById("tooltip");
+
+        function showTooltip(e, task) {
+            const dateFormat = (date) => {
+                return date.toLocaleDateString("en-GB", { weekday: "short", day: "2-digit", month: "short", year: "numeric" });
+            };
+
+            const startStr = dateFormat(task.start);
+            const endStr = dateFormat(task.end);
+            const duration = task.start.getTime() === task.end.getTime() ?
+                startStr :
+                `${startStr} – ${endStr}`;
+
+            tooltip.innerHTML = `<strong>${task.name}</strong><br>${duration}<br><em>${task.participants}</em>`;
+            tooltip.classList.add("visible");
+
+            const rect = e.target.getBoundingClientRect();
+            tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + "px";
+            tooltip.style.top = (rect.top - tooltip.offsetHeight - 8) + "px";
+        }
+
+        function hideTooltip() {
+            tooltip.classList.remove("visible");
+        }
+    </script>
+</body>
+</html>
