@@ -60,14 +60,12 @@
         .month-labels {
             position: sticky;
             top: 0;
-            left: 0;
             height: 28px;
             background: white;
             border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            align-items: center;
+            display: block;
             z-index: 100;
-            overflow: visible;
+            min-width: 100%;
         }
 
         .month-label {
@@ -76,9 +74,8 @@
             font-weight: 500;
             color: #1a1a1a;
             white-space: nowrap;
-            transform: translateX(-50%);
-            top: 50%;
             transform: translate(-50%, -50%);
+            top: 50%;
         }
 
         .label-primary {
@@ -94,15 +91,34 @@
             font-weight: 600;
         }
 
+        .label-secondary-wip {
+            font-size: 12px;
+            fill: #333;
+            font-weight: 600;
+            font-style: italic;
+        }
+
         .label-tertiary {
             font-size: 12px;
             fill: #555;
+        }
+
+        .label-tertiary-wip {
+            font-size: 12px;
+            fill: #555;
+            font-style: italic;
         }
 
         .label-unscheduled {
             font-size: 12px;
             fill: #999;
             font-style: italic;
+        }
+
+        .label-participants {
+            font-size: 12px;
+            fill: #999;
+            font-style: normal;
         }
 
         .grid-line {
@@ -113,6 +129,11 @@
         .month-separator {
             stroke: #d0d0d0;
             stroke-width: 2;
+        }
+
+        .guide-line {
+            stroke: #d8d8d8;
+            stroke-width: 1;
         }
 
         .bar {
@@ -150,6 +171,33 @@
         /* Marketing - Indigo */
         .bar.marketing { fill: #6366f1; }
         .bar.marketing:hover { fill: #4f46e5; }
+
+        /* Scheduled but venue not yet confirmed: hollow-look bar, heavy border in the department colour.
+           Fill matches the chart background rather than "none" so the whole shape stays hoverable —
+           fill:none only registers pointer events on the stroke, dropping the tooltip mid-hover. */
+        .bar.venue-tbc,
+        .bar.venue-tbc:hover {
+            fill: #fafafa !important;
+            stroke-width: 2;
+        }
+
+        .bar.group.venue-tbc { stroke: #7c3aed; }
+        .bar.group.venue-tbc:hover { stroke: #6d28d9; }
+
+        .bar.hotel.venue-tbc { stroke: #2563eb; }
+        .bar.hotel.venue-tbc:hover { stroke: #1d4ed8; }
+
+        .bar.restaurants.venue-tbc { stroke: #059669; }
+        .bar.restaurants.venue-tbc:hover { stroke: #047857; }
+
+        .bar.spa.venue-tbc { stroke: #db2777; }
+        .bar.spa.venue-tbc:hover { stroke: #be185d; }
+
+        .bar.support.venue-tbc { stroke: #ea580c; }
+        .bar.support.venue-tbc:hover { stroke: #c2410c; }
+
+        .bar.marketing.venue-tbc { stroke: #6366f1; }
+        .bar.marketing.venue-tbc:hover { stroke: #4f46e5; }
 
         .tooltip {
             position: absolute;
@@ -246,8 +294,12 @@
                 <div class="legend-color" style="background: #6366f1;"></div>
                 <span>Marketing</span>
             </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ffffff; border: 2.5px solid #666;"></div>
+                <span>Venue to be confirmed</span>
+            </div>
             <div class="legend-note">
-                Italicised items: not yet scheduled
+                Italicised (grey) items: not yet scheduled &nbsp;•&nbsp; Italicised (black) items: partially scheduled — not everyone booked yet &nbsp;•&nbsp; Hollow bar (heavy border, no fill): scheduled but venue not yet confirmed
             </div>
         </div>
     </div>
@@ -274,7 +326,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Outcomes",
+                                name: "1:1 Mentoring Round 1 – Outcomes (2hrs)",
                                 start: new Date(2026, 7, 25),
                                 end: new Date(2026, 7, 25),
                                 startTime: "08:00",
@@ -288,17 +340,29 @@
                             },
                             {
                                 name: "Group Session 2 – Decision-making (3hrs)",
-                                scheduled: false
+                                start: new Date(2026, 8, 8),
+                                end: new Date(2026, 8, 8),
+                                startTime: "08:30",
+                                endTime: "11:30",
+                                venue: "Ruby Room",
+                                scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 2 – Indicators (1hr)",
-                                scheduled: false
+                                name: "1:1 Mentoring Round 2 – Indicators (2hrs)",
+                                start: new Date(2026, 8, 14),
+                                end: new Date(2026, 8, 14),
+                                venue: "Ruby Room",
+                                scheduled: true,
+                                people: [
+                                    { name: "Mark", startTime: "08:00", endTime: "09:00" },
+                                    { name: "Penny", startTime: "09:00", endTime: "10:00" }
+                                ]
                             }
                         ]
                     },
                     {
                         name: "Senior Managers Restaurants FOH",
-                        participants: "Chantelle, Luzuko, Megan, Wandile, Lius",
+                        participants: "Chantelle, Luzuko, Megan, Wandile, Luis",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -310,7 +374,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Outcomes",
+                                name: "1:1 Mentoring Round 1 – Outcomes (6hrs)",
                                 start: new Date(2026, 7, 25),
                                 end: new Date(2026, 7, 25),
                                 startTime: "10:00",
@@ -322,21 +386,37 @@
                                     { name: "Luzuko", startTime: "11:00", endTime: "12:00" },
                                     { name: "Megan", startTime: "12:00", endTime: "13:00" },
                                     { name: "Wandile", startTime: "14:00", endTime: "15:00" },
-                                    { name: "Lius", startTime: "15:00", endTime: "16:00" }
+                                    { name: "Luis", startTime: "15:00", endTime: "16:00" }
                                 ]
                             },
                             {
                                 name: "Group Session 2 – Decision-making (3hrs)",
-                                scheduled: false
+                                start: new Date(2026, 8, 7),
+                                end: new Date(2026, 8, 7),
+                                startTime: "13:30",
+                                endTime: "16:30",
+                                venue: "Ruby Room",
+                                scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 2 – Indicators (1hr)",
-                                scheduled: false
+                                name: "1:1 Mentoring Round 2 – Indicators (6hrs)",
+                                start: new Date(2026, 8, 14),
+                                end: new Date(2026, 8, 14),
+                                venue: "Ruby Room",
+                                scheduled: true,
+                                people: [
+                                    { name: "Chantelle", startTime: "10:00", endTime: "11:00" },
+                                    { name: "Luzuko", startTime: "11:00", endTime: "12:00" },
+                                    { name: "Megan", startTime: "13:00", endTime: "14:00" },
+                                    { name: "Wandile", startTime: "14:00", endTime: "15:00" },
+                                    { name: "Luis", startTime: "15:00", endTime: "16:00" }
+                                ]
                             }
                         ]
                     },
                     {
                         name: "Senior Managers Hotel Operations",
+                        participants: "Ffyona, Shaun, Kamiela, Jackson",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -366,6 +446,7 @@
                     },
                     {
                         name: "Senior Managers Spa",
+                        participants: "Bennie, Quanita, Vacant (Asst Manager)",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -395,7 +476,7 @@
                     },
                     {
                         name: "Senior Managers Support",
-                        participants: "Jeanine",
+                        participants: "Rika, Jeanine, Noleen, Ryno",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -404,15 +485,13 @@
                                 scheduled: false
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Outcomes",
+                                name: "1:1 Mentoring Round 1 – Outcomes (1hr each)",
                                 start: new Date(2026, 7, 17),
-                                end: new Date(2026, 7, 17),
-                                startTime: "15:00",
-                                endTime: "16:00",
-                                venue: "Ruby",
+                                end: new Date(2026, 7, 19),
                                 scheduled: true,
                                 people: [
-                                    { name: "Jeanine", startTime: "15:00", endTime: "16:00" }
+                                    { name: "Jeanine", date: new Date(2026, 7, 17), startTime: "15:00", endTime: "16:00", venue: "Ruby" },
+                                    { name: "Ryno", date: new Date(2026, 7, 19), startTime: "10:00", endTime: "11:00", venue: "Tryn" }
                                 ]
                             },
                             {
@@ -422,10 +501,14 @@
                                 scheduled: false
                             },
                             {
-                                name: "1:1 Mentoring Round 2 – Indicators (1hr)",
-                                start: null,
-                                end: null,
-                                scheduled: false
+                                name: "1:1 Mentoring Round 2 – Indicators (1hr each)",
+                                start: new Date(2026, 7, 28),
+                                end: new Date(2026, 7, 28),
+                                scheduled: true,
+                                people: [
+                                    { name: "Ryno", startTime: "13:00", endTime: "14:00", venue: "Tryn" },
+                                    { name: "Jeanine", startTime: "14:00", endTime: "15:00", venue: "Ruby" }
+                                ]
                             }
                         ]
                     },
@@ -437,6 +520,7 @@
                 initiatives: [
                     {
                         name: "Hotel Operations Manager coaching",
+                        participants: "Natalie",
                         sessions: [
                             { name: "Session 1 (1hr)", start: null, end: null, scheduled: false },
                             { name: "Session 2 (1hr)", start: null, end: null, scheduled: false },
@@ -446,6 +530,7 @@
                     },
                     {
                         name: "Revenue Manager coaching",
+                        participants: "Hein",
                         sessions: [
                             { name: "Session 1 (1hr)", start: null, end: null, scheduled: false },
                             { name: "Session 2 (1hr)", start: null, end: null, scheduled: false },
@@ -462,6 +547,7 @@
                 initiatives: [
                     {
                         name: "New Starters",
+                        participants: "Emile, Imaan, Marisa, Piwe, Siwe",
                         sessions: [
                             {
                                 name: "Session 1 (2hrs)",
@@ -494,6 +580,7 @@
                     },
                     {
                         name: "Restaurant Manager coaching",
+                        participants: "Natalie",
                         sessions: [
                             { name: "Session 1 (1hr)", start: null, end: null, scheduled: false },
                             { name: "Session 2 (1hr)", start: null, end: null, scheduled: false },
@@ -526,6 +613,7 @@
                     },
                     {
                         name: "Senior team update",
+                        participants: "Bennie, Quanita (Pinkie), Vacant (Asst Manager)",
                         sessions: [
                             { name: "Session 1 (1hr)", start: new Date(2026, 7, 14), end: new Date(2026, 7, 14), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
                             { name: "Session 2 (1hr)", start: new Date(2026, 9, 16), end: new Date(2026, 9, 16), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
@@ -545,9 +633,42 @@
                         name: "Support Onboarding",
                         participants: "Anton, Ryno, Rika, Jessica, Ffyona",
                         sessions: [
-                            { name: "3-hour Session 1 (3hrs)", start: null, end: null, scheduled: false },
-                            { name: "3-hour Session 2 (3hrs)", start: null, end: null, scheduled: false },
-                            { name: "1:1 – Anton (1hr)", start: null, end: null, scheduled: false },
+                            {
+                                name: "Session 1 (3hrs)",
+                                start: new Date(2026, 7, 17),
+                                end: new Date(2026, 7, 17),
+                                startTime: "09:30",
+                                endTime: "12:30",
+                                venue: "Cuvee",
+                                scheduled: true
+                            },
+                            {
+                                name: "Session 2 (3hrs)",
+                                start: new Date(2026, 7, 26),
+                                end: new Date(2026, 7, 26),
+                                startTime: "09:00",
+                                endTime: "12:00",
+                                venue: "Coach Building",
+                                scheduled: true
+                            },
+                            {
+                                name: "Session 3 (3hrs)",
+                                start: new Date(2026, 8, 9),
+                                end: new Date(2026, 8, 9),
+                                startTime: "08:30",
+                                endTime: "11:30",
+                                venue: "Coach Building",
+                                scheduled: true
+                            },
+                            {
+                                name: "1:1 – Anton (2hrs)",
+                                start: new Date(2026, 7, 21),
+                                end: new Date(2026, 7, 21),
+                                startTime: "09:00",
+                                endTime: "11:00",
+                                venue: "Microsoft Teams",
+                                scheduled: true
+                            },
                             { name: "1:1 – Ryno (1hr)", start: null, end: null, scheduled: false },
                             { name: "1:1 – Rika (1hr)", start: null, end: null, scheduled: false },
                             { name: "1:1 – Jessica (1hr)", start: null, end: null, scheduled: false },
@@ -561,7 +682,7 @@
                 unitLabel: "Marketing",
                 initiatives: [
                     {
-                        name: "Senior Managers Playbook Training",
+                        name: "Playbook Updates",
                         sessions: [
                             { name: "Session 1 (3hrs)", start: null, end: null, scheduled: false },
                             { name: "Session 2 (3hrs)", start: null, end: null, scheduled: false },
@@ -619,20 +740,40 @@
             return margin.left + days * pixelsPerDay;
         }
 
-        // Draw grid
+        function countParticipants(participantsStr) {
+            if (!participantsStr) return 0;
+            return participantsStr
+                .split(",")
+                .map(s => s.trim())
+                .filter(s => s && !/vacant/i.test(s))
+                .length;
+        }
+
+        function isVenueConfirmed(venue) {
+            if (!venue) return false;
+            const v = venue.trim().toLowerCase();
+            return v !== "" && v !== "tbc" && v !== "tbd" && v !== "tba";
+        }
+
+        // Draw only month separators (vertical lines)
         for (let i = 0; i <= daysDiff; i++) {
             const date = new Date(minDate);
             date.setDate(date.getDate() + i);
             const x = margin.left + i * pixelsPerDay;
 
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            line.setAttribute("x1", x);
-            line.setAttribute("y1", margin.top);
-            line.setAttribute("x2", x);
-            line.setAttribute("y2", height - margin.bottom);
-            line.setAttribute("class", date.getDate() === 1 && i > 0 ? "month-separator" : "grid-line");
-            svg.appendChild(line);
+            if (date.getDate() === 1 && i > 0) {
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", x);
+                line.setAttribute("y1", margin.top);
+                line.setAttribute("x2", x);
+                line.setAttribute("y2", height - margin.bottom);
+                line.setAttribute("class", "month-separator");
+                svg.appendChild(line);
+            }
         }
+
+        // Store guide lines to draw later (after we know which sessions are scheduled)
+        const guideLines = [];
 
         // Draw month labels as HTML elements (for sticky positioning)
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -700,7 +841,11 @@
                 initLabel.setAttribute("x", margin.left - 12);
                 initLabel.setAttribute("y", initY + 14);
                 initLabel.setAttribute("text-anchor", "end");
-                initLabel.setAttribute("class", "label-secondary");
+
+                // Determine scheduling status: work-in-progress if some (but not all) sessions are scheduled
+                const scheduledCount = initiative.sessions.filter(s => s.scheduled).length;
+                const isWip = scheduledCount > 0 && scheduledCount < initiative.sessions.length;
+                initLabel.setAttribute("class", isWip ? "label-secondary-wip" : "label-secondary");
                 initLabel.textContent = initiative.name;
                 svg.appendChild(initLabel);
                 rowIndex++;
@@ -712,7 +857,7 @@
                     particLabel.setAttribute("x", margin.left - 12);
                     particLabel.setAttribute("y", particY + 14);
                     particLabel.setAttribute("text-anchor", "end");
-                    particLabel.setAttribute("class", "label-unscheduled");
+                    particLabel.setAttribute("class", "label-participants");
                     particLabel.textContent = initiative.participants;
                     svg.appendChild(particLabel);
                     rowIndex++;
@@ -725,7 +870,18 @@
                     sessLabel.setAttribute("x", margin.left - 12);
                     sessLabel.setAttribute("y", sessY + 14);
                     sessLabel.setAttribute("text-anchor", "end");
-                    sessLabel.setAttribute("class", session.scheduled ? "label-tertiary" : "label-unscheduled");
+
+                    let sessClass;
+                    if (!session.scheduled) {
+                        sessClass = "label-unscheduled";
+                    } else if (session.people) {
+                        // Partially scheduled: fewer people booked than the initiative's full participant list
+                        const expectedCount = countParticipants(initiative.participants);
+                        sessClass = (expectedCount > 0 && session.people.length < expectedCount) ? "label-tertiary-wip" : "label-tertiary";
+                    } else {
+                        sessClass = "label-tertiary";
+                    }
+                    sessLabel.setAttribute("class", sessClass);
                     sessLabel.textContent = session.name;
                     svg.appendChild(sessLabel);
 
@@ -733,14 +889,28 @@
                     if (session.scheduled && session.start && session.end) {
                         const startX = getXPosition(session.start);
                         const endX = getXPosition(session.end);
+
+                        // Flag if the venue isn't confirmed yet (missing, or a placeholder like "Tbc")
+                        const venueConfirmed = session.people && session.people.length > 0
+                            ? session.people.every(p => isVenueConfirmed(p.venue || session.venue))
+                            : isVenueConfirmed(session.venue);
+
                         const barWidth = Math.max(endX - startX, 6);
+
+                        // Store guide line info (position at center of row for alignment)
+                        // Line stops just before the marker to avoid bisecting it
+                        guideLines.push({
+                            y: sessY + (rowHeight / 2),
+                            startX: margin.left,
+                            endX: startX - 2
+                        });
 
                         const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                         bar.setAttribute("x", startX);
-                        bar.setAttribute("y", sessY - 7);
+                        bar.setAttribute("y", sessY + (rowHeight / 2) - 7);
                         bar.setAttribute("width", barWidth);
                         bar.setAttribute("height", 14);
-                        bar.setAttribute("class", `bar ${unit.unit}`);
+                        bar.setAttribute("class", `bar ${unit.unit}${venueConfirmed ? "" : " venue-tbc"}`);
 
                         bar.addEventListener("mouseover", (e) => showTooltip(e, session));
                         bar.addEventListener("mouseout", hideTooltip);
@@ -754,6 +924,17 @@
             rowIndex += 0.5; // Spacing between units
         });
 
+        // Draw horizontal guide lines (from left margin to bars)
+        guideLines.forEach(guideLine => {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", margin.left);
+            line.setAttribute("y1", guideLine.y);
+            line.setAttribute("x2", guideLine.endX);
+            line.setAttribute("y2", guideLine.y);
+            line.setAttribute("class", "guide-line");
+            svg.appendChild(line);
+        });
+
         svg.setAttribute("width", width);
         svg.setAttribute("height", height);
 
@@ -765,8 +946,9 @@
                 return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
             };
 
-            // Extract base session name (before first dash)
-            const baseName = session.name.split(" – ")[0];
+            // Extract base session name (before first dash) and remove hours in parentheses
+            const nameWithoutDesc = session.name.split(" – ")[0];
+            const baseName = nameWithoutDesc.replace(/\s*\(\d+\s*hrs?\)\s*$/i, "").trim();
 
             const startStr = dateFormat(session.start);
             let tooltipText = "";
@@ -775,9 +957,13 @@
             if (session.people && session.people.length > 0) {
                 session.people.forEach(person => {
                     if (tooltipText) tooltipText += "\n";
-                    tooltipText += `${person.name} • ${startStr} • ${person.startTime}–${person.endTime}`;
-                    if (session.venue && session.venue !== "TBD") {
-                        tooltipText += ` • ${session.venue}`;
+                    const personDateStr = person.date ? dateFormat(person.date) : startStr;
+                    tooltipText += `${person.name} • ${personDateStr} • ${person.startTime}–${person.endTime}`;
+                    const personVenue = person.venue || session.venue;
+                    if (isVenueConfirmed(personVenue)) {
+                        tooltipText += ` • ${personVenue}`;
+                    } else {
+                        tooltipText += ` • Venue TBC`;
                     }
                 });
             } else {
@@ -786,8 +972,8 @@
                     tooltipText += ` • ${session.startTime}–${session.endTime}`;
                 }
 
-                if (session.venue && session.venue !== "TBD") {
-                    tooltipText += ` • ${session.venue}`;
+                if (session.scheduled) {
+                    tooltipText += isVenueConfirmed(session.venue) ? ` • ${session.venue}` : ` • Venue TBC`;
                 }
             }
 
