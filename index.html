@@ -235,6 +235,7 @@
                 initiatives: [
                     {
                         name: "Senior Managers Restaurants BOH",
+                        participants: "Mark, Penny",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -246,7 +247,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Mark, Penny – Outcomes",
+                                name: "1:1 Mentoring Round 1 – Outcomes",
                                 start: new Date(2026, 7, 25),
                                 end: new Date(2026, 7, 25),
                                 startTime: "08:00",
@@ -270,6 +271,7 @@
                     },
                     {
                         name: "Senior Managers Restaurants FOH",
+                        participants: "Chantelle, Luzuko, Megan, Wandile, Lius",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -281,7 +283,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Chantelle, Luzuko, Megan, Wandile, Lius – Outcomes",
+                                name: "1:1 Mentoring Round 1 – Outcomes",
                                 start: new Date(2026, 7, 25),
                                 end: new Date(2026, 7, 25),
                                 startTime: "10:00",
@@ -366,6 +368,7 @@
                     },
                     {
                         name: "Senior Managers Support",
+                        participants: "Jeanine",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -374,7 +377,7 @@
                                 scheduled: false
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Jeanine – Outcomes",
+                                name: "1:1 Mentoring Round 1 – Outcomes",
                                 start: new Date(2026, 7, 17),
                                 end: new Date(2026, 7, 17),
                                 startTime: "15:00",
@@ -434,7 +437,7 @@
                         name: "New Starters",
                         sessions: [
                             {
-                                name: "Session 1 (2 hours)",
+                                name: "Session 1 (2hrs)",
                                 start: new Date(2026, 7, 19),
                                 end: new Date(2026, 7, 19),
                                 startTime: "14:00",
@@ -443,7 +446,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "Session 2 (2 hours)",
+                                name: "Session 2 (2hrs)",
                                 start: new Date(2026, 7, 26),
                                 end: new Date(2026, 7, 26),
                                 startTime: "14:00",
@@ -452,7 +455,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "Session 3 (2 hours)",
+                                name: "Session 3 (2hrs)",
                                 start: new Date(2026, 8, 9),
                                 end: new Date(2026, 8, 9),
                                 startTime: "12:00",
@@ -477,7 +480,8 @@
                 unitLabel: "Spa",
                 initiatives: [
                     {
-                        name: "Coaching & Mentoring – Monique",
+                        name: "Coaching & Mentoring",
+                        participants: "Monique",
                         sessions: [
                             { name: "Session 1 (1hr)", start: new Date(2026, 6, 23), end: new Date(2026, 6, 23), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
                             { name: "Session 2 (1hr)", start: new Date(2026, 7, 11), end: new Date(2026, 7, 11), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
@@ -512,9 +516,10 @@
                 initiatives: [
                     {
                         name: "Support Onboarding",
+                        participants: "Anton, Ryno, Rika, Jessica, Ffyona",
                         sessions: [
-                            { name: "3-hour Session 1", start: null, end: null, scheduled: false },
-                            { name: "3-hour Session 2", start: null, end: null, scheduled: false },
+                            { name: "3-hour Session 1 (3hrs)", start: null, end: null, scheduled: false },
+                            { name: "3-hour Session 2 (3hrs)", start: null, end: null, scheduled: false },
                             { name: "1:1 – Anton (1hr)", start: null, end: null, scheduled: false },
                             { name: "1:1 – Ryno (1hr)", start: null, end: null, scheduled: false },
                             { name: "1:1 – Rika (1hr)", start: null, end: null, scheduled: false },
@@ -569,6 +574,7 @@
             totalRows++; // unit header
             unit.initiatives.forEach(initiative => {
                 totalRows++; // initiative header
+                if (initiative.participants) totalRows++; // participants row if exists
                 totalRows += initiative.sessions.length; // sessions
             });
             totalRows += 0.5; // spacing between units
@@ -601,24 +607,51 @@
             svg.appendChild(line);
         }
 
-        // Draw date labels
+        // Draw month labels centered between month separators
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let monthLabelPositions = [];
+        let currentMonth = null;
+        let monthStartI = 0;
+
         for (let i = 0; i <= daysDiff; i++) {
             const date = new Date(minDate);
             date.setDate(date.getDate() + i);
+            const monthYear = `${date.getMonth()}-${date.getFullYear()}`;
 
-            if (date.getDate() === 1 || i === 0 || i === daysDiff) {
-                const x = margin.left + i * pixelsPerDay;
-                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                text.setAttribute("x", x);
-                text.setAttribute("y", margin.top - 12);
-                text.setAttribute("text-anchor", "middle");
-                text.setAttribute("class", "axis-label");
-
-                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                text.textContent = `${monthNames[date.getMonth()]} ${date.getDate()}`;
-                svg.appendChild(text);
+            if (monthYear !== currentMonth) {
+                if (currentMonth !== null) {
+                    // Record the position for the previous month
+                    const midI = (monthStartI + i - 1) / 2;
+                    const monthDate = new Date(minDate);
+                    monthDate.setDate(monthDate.getDate() + monthStartI);
+                    monthLabelPositions.push({ i: midI, month: monthDate.getMonth(), year: monthDate.getFullYear() });
+                }
+                monthStartI = i;
+                currentMonth = monthYear;
             }
         }
+
+        // Add label for the last month
+        if (currentMonth !== null) {
+            const midI = (monthStartI + daysDiff) / 2;
+            const monthDate = new Date(minDate);
+            monthDate.setDate(monthDate.getDate() + monthStartI);
+            monthLabelPositions.push({ i: midI, month: monthDate.getMonth(), year: monthDate.getFullYear() });
+        }
+
+        // Draw the labels
+        monthLabelPositions.forEach(pos => {
+            const x = margin.left + pos.i * pixelsPerDay;
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", x);
+            text.setAttribute("y", margin.top - 12);
+            text.setAttribute("text-anchor", "middle");
+            text.setAttribute("class", "axis-label");
+
+            const yearStr = (pos.year % 100).toString().padStart(2, '0');
+            text.textContent = `${monthNames[pos.month]} '${yearStr}`;
+            svg.appendChild(text);
+        });
 
         // Draw hierarchy
         let rowIndex = 0;
@@ -646,6 +679,19 @@
                 initLabel.textContent = initiative.name;
                 svg.appendChild(initLabel);
                 rowIndex++;
+
+                // Display participants if they exist
+                if (initiative.participants) {
+                    const particY = margin.top + rowIndex * rowHeight;
+                    const particLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    particLabel.setAttribute("x", margin.left - 12);
+                    particLabel.setAttribute("y", particY + 14);
+                    particLabel.setAttribute("text-anchor", "end");
+                    particLabel.setAttribute("class", "label-unscheduled");
+                    particLabel.textContent = initiative.participants;
+                    svg.appendChild(particLabel);
+                    rowIndex++;
+                }
 
                 initiative.sessions.forEach(session => {
                     // Tertiary (session)
