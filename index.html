@@ -39,9 +39,11 @@
         .gantt-wrapper {
             position: relative;
             overflow-x: auto;
+            overflow-y: auto;
             border: 1px solid #e0e0e0;
             border-radius: 6px;
             background: #fafafa;
+            max-height: 70vh;
         }
 
         svg {
@@ -53,6 +55,30 @@
             font-size: 13px;
             fill: #1a1a1a;
             font-weight: 500;
+        }
+
+        .month-labels {
+            position: sticky;
+            top: 0;
+            left: 0;
+            height: 28px;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            overflow: visible;
+        }
+
+        .month-label {
+            position: absolute;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a1a1a;
+            white-space: nowrap;
+            transform: translateX(-50%);
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .label-primary {
@@ -190,8 +216,9 @@
             Scheduled sessions and proposed initiatives across all divisions
         </div>
 
-        <div class="gantt-wrapper">
-            <svg id="gantt" width="1400" height="1000"></svg>
+        <div class="gantt-wrapper" style="position: relative;">
+            <div class="month-labels" id="monthLabels"></div>
+            <svg id="gantt" width="1400" height="1000" style="display: block;"></svg>
         </div>
 
         <div class="legend">
@@ -607,8 +634,9 @@
             svg.appendChild(line);
         }
 
-        // Draw month labels centered between month separators
+        // Draw month labels as HTML elements (for sticky positioning)
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const monthLabelsDiv = document.getElementById("monthLabels");
         let monthLabelPositions = [];
         let currentMonth = null;
         let monthStartI = 0;
@@ -639,18 +667,15 @@
             monthLabelPositions.push({ i: midI, month: monthDate.getMonth(), year: monthDate.getFullYear() });
         }
 
-        // Draw the labels
+        // Create HTML month labels (positioned as overlay for sticky scrolling)
         monthLabelPositions.forEach(pos => {
             const x = margin.left + pos.i * pixelsPerDay;
-            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            text.setAttribute("x", x);
-            text.setAttribute("y", margin.top - 12);
-            text.setAttribute("text-anchor", "middle");
-            text.setAttribute("class", "axis-label");
-
+            const label = document.createElement("div");
+            label.className = "month-label";
             const yearStr = (pos.year % 100).toString().padStart(2, '0');
-            text.textContent = `${monthNames[pos.month]} '${yearStr}`;
-            svg.appendChild(text);
+            label.textContent = `${monthNames[pos.month]} '${yearStr}`;
+            label.style.left = x + "px";
+            monthLabelsDiv.appendChild(label);
         });
 
         // Draw hierarchy
@@ -717,8 +742,8 @@
                         bar.setAttribute("height", 14);
                         bar.setAttribute("class", `bar ${unit.unit}`);
 
-                        bar.addEventListener("mouseenter", (e) => showTooltip(e, session));
-                        bar.addEventListener("mouseleave", hideTooltip);
+                        bar.addEventListener("mouseover", (e) => showTooltip(e, session));
+                        bar.addEventListener("mouseout", hideTooltip);
 
                         svg.appendChild(bar);
                     }
