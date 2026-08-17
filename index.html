@@ -55,15 +55,28 @@
             font-weight: 500;
         }
 
-        .task-label {
+        .label-primary {
             font-size: 13px;
-            fill: #1a1a1a;
+            fill: #000;
+            font-weight: 700;
+            letter-spacing: 0.3px;
         }
 
-        .group-label {
+        .label-secondary {
             font-size: 12px;
-            fill: #666666;
-            font-weight: 500;
+            fill: #333;
+            font-weight: 600;
+        }
+
+        .label-tertiary {
+            font-size: 12px;
+            fill: #555;
+        }
+
+        .label-unscheduled {
+            font-size: 12px;
+            fill: #999;
+            font-style: italic;
         }
 
         .grid-line {
@@ -76,20 +89,21 @@
             stroke-width: 2;
         }
 
-        .bar-group {
-            cursor: pointer;
-        }
-
         .bar {
-            rx: 4;
-            ry: 4;
+            rx: 3;
+            ry: 3;
             transition: fill 0.2s ease, filter 0.2s ease;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.05));
+            cursor: pointer;
         }
 
         .bar:hover {
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
         }
+
+        /* Group - Purple */
+        .bar.group { fill: #7c3aed; }
+        .bar.group:hover { fill: #6d28d9; }
 
         /* Hotel - Blue */
         .bar.hotel { fill: #2563eb; }
@@ -103,13 +117,13 @@
         .bar.spa { fill: #db2777; }
         .bar.spa:hover { fill: #be185d; }
 
-        /* Support - Amber */
-        .bar.support { fill: #f59e0b; }
-        .bar.support:hover { fill: #d97706; }
+        /* Support - Orange */
+        .bar.support { fill: #ea580c; }
+        .bar.support:hover { fill: #c2410c; }
 
-        /* Group - Purple */
-        .bar.group { fill: #7c3aed; }
-        .bar.group:hover { fill: #6d28d9; }
+        /* Marketing - Indigo */
+        .bar.marketing { fill: #6366f1; }
+        .bar.marketing:hover { fill: #4f46e5; }
 
         .tooltip {
             position: absolute;
@@ -153,38 +167,38 @@
             border-radius: 2px;
         }
 
+        .legend-note {
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
         .date-range {
             font-size: 12px;
             color: #999999;
             margin-bottom: 16px;
-        }
-
-        .group-section {
-            margin-bottom: 8px;
-            padding: 4px 0;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .group-section:first-child {
-            border-top: none;
-            margin-top: 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>BFH Sessions Timeline</h1>
-        <p class="subtitle">Fiscal Year 2026–27 (July 2026 – June 2027) — Grouped by Business Unit</p>
+        <p class="subtitle">Fiscal Year 2026–27 (July 2026 – June 2027)</p>
 
         <div class="date-range">
-            Current scheduled sessions: August – September 2026
+            Scheduled sessions and proposed initiatives across all divisions
         </div>
 
         <div class="gantt-wrapper">
-            <svg id="gantt" width="1200" height="500"></svg>
+            <svg id="gantt" width="1400" height="1000"></svg>
         </div>
 
         <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #7c3aed;"></div>
+                <span>Group</span>
+            </div>
             <div class="legend-item">
                 <div class="legend-color" style="background: #2563eb;"></div>
                 <span>Hotel</span>
@@ -198,12 +212,15 @@
                 <span>Spa</span>
             </div>
             <div class="legend-item">
-                <div class="legend-color" style="background: #f59e0b;"></div>
+                <div class="legend-color" style="background: #ea580c;"></div>
                 <span>Support</span>
             </div>
             <div class="legend-item">
-                <div class="legend-color" style="background: #7c3aed;"></div>
-                <span>Group</span>
+                <div class="legend-color" style="background: #6366f1;"></div>
+                <span>Marketing</span>
+            </div>
+            <div class="legend-note">
+                Italicised items: not yet scheduled
             </div>
         </div>
     </div>
@@ -211,115 +228,365 @@
     <div id="tooltip" class="tooltip"></div>
 
     <script>
-        const data = [
+        const structure = [
             {
-                id: 1,
-                group: "Hotel",
-                name: "Check-in: Neilen & Malcolm",
-                start: new Date(2026, 7, 5),
-                end: new Date(2026, 7, 5),
+                unit: "group",
+                unitLabel: "Group",
+                initiatives: [
+                    {
+                        name: "Restaurants BOH",
+                        sessions: [
+                            {
+                                name: "Group Session 1 – Psychological Safety (3 hours)",
+                                start: new Date(2026, 7, 18),
+                                end: new Date(2026, 7, 18),
+                                startTime: "09:30",
+                                endTime: "12:30",
+                                venue: "Cuvee Room",
+                                scheduled: true
+                            },
+                            {
+                                name: "1:1 Mentoring Round 1 – Mark, Penny – Outcomes",
+                                start: new Date(2026, 7, 25),
+                                end: new Date(2026, 7, 25),
+                                startTime: "08:00",
+                                endTime: "10:00",
+                                venue: "Cuvee Room",
+                                scheduled: true,
+                                people: [
+                                    { name: "Mark", startTime: "08:00", endTime: "09:00" },
+                                    { name: "Penny", startTime: "09:00", endTime: "10:00" }
+                                ]
+                            },
+                            {
+                                name: "Group Session 2 – Decision-making (3 hours)",
+                                scheduled: false
+                            },
+                            {
+                                name: "1:1 Mentoring Round 2 – Indicators (1 hour)",
+                                scheduled: false
+                            }
+                        ]
+                    },
+                    {
+                        name: "Restaurants FOH",
+                        sessions: [
+                            {
+                                name: "Group Session 1 – Psychological Safety (3 hours)",
+                                start: new Date(2026, 7, 18),
+                                end: new Date(2026, 7, 18),
+                                startTime: "13:30",
+                                endTime: "16:30",
+                                venue: "Cuvee Room",
+                                scheduled: true
+                            },
+                            {
+                                name: "1:1 Mentoring Round 1 – Chantelle, Luzuko, Megan, Wandile, Lius – Outcomes",
+                                start: new Date(2026, 7, 25),
+                                end: new Date(2026, 7, 25),
+                                startTime: "10:00",
+                                endTime: "16:00",
+                                venue: "Cuvee Room",
+                                scheduled: true,
+                                people: [
+                                    { name: "Chantelle", startTime: "10:00", endTime: "11:00" },
+                                    { name: "Luzuko", startTime: "11:00", endTime: "12:00" },
+                                    { name: "Megan", startTime: "12:00", endTime: "13:00" },
+                                    { name: "Wandile", startTime: "14:00", endTime: "15:00" },
+                                    { name: "Lius", startTime: "15:00", endTime: "16:00" }
+                                ]
+                            },
+                            {
+                                name: "Group Session 2 – Decision-making (3 hours)",
+                                scheduled: false
+                            },
+                            {
+                                name: "1:1 Mentoring Round 2 – Indicators (1 hour)",
+                                scheduled: false
+                            }
+                        ]
+                    },
+                    {
+                        name: "Hotel Operations",
+                        sessions: [
+                            {
+                                name: "1:1 Mentoring Round 1 – Outcomes (1 hour)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            },
+                            {
+                                name: "Group Session 1 – Psychological Safety (3 hours)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            },
+                            {
+                                name: "1:1 Mentoring Round 2 – Indicators (1 hour)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            },
+                            {
+                                name: "Group Session 2 – Decision-making (3 hours)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            }
+                        ]
+                    },
+                    {
+                        name: "Spa",
+                        sessions: [
+                            {
+                                name: "1:1 Mentoring Round 1 – Outcomes (1 hour)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            },
+                            {
+                                name: "Group Session 1 – Psychological Safety (3 hours)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            },
+                            {
+                                name: "1:1 Mentoring Round 2 – Indicators (1 hour)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            },
+                            {
+                                name: "Group Session 2 – Decision-making (3 hours)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            }
+                        ]
+                    },
+                    {
+                        name: "Support",
+                        sessions: [
+                            {
+                                name: "Group Session 1 – Psychological Safety (3 hours)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            },
+                            {
+                                name: "1:1 Mentoring Round 1 – Jeanine – Outcomes (1 hour)",
+                                start: new Date(2026, 7, 17),
+                                end: new Date(2026, 7, 17),
+                                startTime: "15:00",
+                                endTime: "16:00",
+                                venue: "Ruby",
+                                scheduled: true,
+                                people: [
+                                    { name: "Jeanine", startTime: "15:00", endTime: "16:00" }
+                                ]
+                            },
+                            {
+                                name: "Group Session 2 – Decision-making (3 hours)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            },
+                            {
+                                name: "1:1 Mentoring Round 2 – Indicators (1 hour)",
+                                start: null,
+                                end: null,
+                                scheduled: false
+                            }
+                        ]
+                    },
+                ]
+            },
+            {
                 unit: "hotel",
-                participants: "Neilen Tolmay"
+                unitLabel: "Hotel",
+                initiatives: [
+                    {
+                        name: "Hotel Operations Manager coaching",
+                        sessions: [
+                            { name: "Session 1 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 2 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 3 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 4 (1 hour)", start: null, end: null, scheduled: false }
+                        ]
+                    },
+                    {
+                        name: "Revenue Manager coaching",
+                        sessions: [
+                            { name: "Session 1 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 2 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 3 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 4 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 5 (1 hour)", start: null, end: null, scheduled: false }
+                        ]
+                    }
+                ]
             },
             {
-                id: 2,
-                group: "Hotel",
-                name: "Playbook Training – Accountability Deck",
-                start: new Date(2026, 7, 28),
-                end: new Date(2026, 7, 28),
-                unit: "hotel",
-                participants: "Marguerite Wiseman"
-            },
-            {
-                id: 3,
-                group: "Restaurants",
-                name: "New Starters – Session 1",
-                start: new Date(2026, 7, 19),
-                end: new Date(2026, 7, 20),
                 unit: "restaurants",
-                participants: "Kerry Kilpin, Natalie Wells, Imaan Bardien"
+                unitLabel: "Restaurants",
+                initiatives: [
+                    {
+                        name: "New Starters",
+                        sessions: [
+                            {
+                                name: "Session 1 (2 hours)",
+                                start: new Date(2026, 7, 19),
+                                end: new Date(2026, 7, 19),
+                                startTime: "14:00",
+                                endTime: "16:00",
+                                venue: "Ruby Room",
+                                scheduled: true
+                            },
+                            {
+                                name: "Session 2 (2 hours)",
+                                start: new Date(2026, 7, 26),
+                                end: new Date(2026, 7, 26),
+                                startTime: "14:00",
+                                endTime: "16:00",
+                                venue: "Tryn",
+                                scheduled: true
+                            },
+                            {
+                                name: "Session 3 (2 hours)",
+                                start: new Date(2026, 8, 9),
+                                end: new Date(2026, 8, 9),
+                                startTime: "12:00",
+                                endTime: "14:00",
+                                venue: "Ruby Room",
+                                scheduled: true
+                            }
+                        ]
+                    },
+                    {
+                        name: "Restaurant Manager coaching",
+                        sessions: [
+                            { name: "Session 1 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 2 (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "Session 3 (1 hour)", start: null, end: null, scheduled: false }
+                        ]
+                    }
+                ]
             },
             {
-                id: 4,
-                group: "Restaurants",
-                name: "Playbook – Session 1",
-                start: new Date(2026, 7, 19),
-                end: new Date(2026, 7, 19),
-                unit: "restaurants",
-                participants: "Tryn & Bistro teams"
+                unit: "spa",
+                unitLabel: "Spa",
+                initiatives: [
+                    {
+                        name: "Coaching & Mentoring – Monique",
+                        sessions: [
+                            { name: "Session 1 (1 hour)", start: new Date(2026, 6, 23), end: new Date(2026, 6, 23), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 2 (1 hour)", start: new Date(2026, 7, 11), end: new Date(2026, 7, 11), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 3 (1 hour)", start: new Date(2026, 8, 8), end: new Date(2026, 8, 8), startTime: "12:30", endTime: "13:30", venue: "Tbc", scheduled: true },
+                            { name: "Session 4 (1 hour)", start: new Date(2026, 9, 9), end: new Date(2026, 9, 9), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 5 (1 hour)", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "09:00", endTime: "10:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 6 (1 hour)", start: new Date(2026, 11, 8), end: new Date(2026, 11, 8), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 7 (1 hour)", start: new Date(2027, 0, 19), end: new Date(2027, 0, 19), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 8 (1 hour)", start: new Date(2027, 1, 9), end: new Date(2027, 1, 9), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 9 (1 hour)", start: new Date(2027, 2, 9), end: new Date(2027, 2, 9), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 10 (1 hour)", start: new Date(2027, 3, 6), end: new Date(2027, 3, 6), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 11 (1 hour)", start: new Date(2027, 4, 11), end: new Date(2027, 4, 11), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 12 (1 hour)", start: new Date(2027, 5, 8), end: new Date(2027, 5, 8), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true }
+                        ]
+                    },
+                    {
+                        name: "Senior team update",
+                        sessions: [
+                            { name: "Session 1 (1 hour)", start: new Date(2026, 7, 14), end: new Date(2026, 7, 14), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 2 (1 hour)", start: new Date(2026, 9, 16), end: new Date(2026, 9, 16), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 3 (1 hour)", start: new Date(2026, 11, 4), end: new Date(2026, 11, 4), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 4 (1 hour)", start: new Date(2027, 1, 12), end: new Date(2027, 1, 12), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 5 (1 hour)", start: new Date(2027, 3, 9), end: new Date(2027, 3, 9), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
+                            { name: "Session 6 (1 hour)", start: new Date(2027, 5, 11), end: new Date(2027, 5, 11), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true }
+                        ]
+                    }
+                ]
             },
             {
-                id: 5,
-                group: "Restaurants",
-                name: "New Starters – Session 2",
-                start: new Date(2026, 7, 26),
-                end: new Date(2026, 7, 27),
-                unit: "restaurants",
-                participants: "Kerry Kilpin, Natalie Wells, Imaan Bardien"
+                unit: "support",
+                unitLabel: "Support",
+                initiatives: [
+                    {
+                        name: "Support Onboarding",
+                        sessions: [
+                            { name: "3-hour Session 1", start: null, end: null, scheduled: false },
+                            { name: "3-hour Session 2", start: null, end: null, scheduled: false },
+                            { name: "1:1 – Anton (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "1:1 – Ryno (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "1:1 – Rika (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "1:1 – Jessica (1 hour)", start: null, end: null, scheduled: false },
+                            { name: "1:1 – Ffyona (1 hour)", start: null, end: null, scheduled: false }
+                        ]
+                    }
+                ]
             },
             {
-                id: 6,
-                group: "Restaurants",
-                name: "Playbook – Session 2",
-                start: new Date(2026, 7, 26),
-                end: new Date(2026, 7, 26),
-                unit: "restaurants",
-                participants: "Tryn & Bistro teams"
-            },
-            {
-                id: 7,
-                group: "Restaurants",
-                name: "New Starters – Session 3",
-                start: new Date(2026, 8, 9),
-                end: new Date(2026, 8, 10),
-                unit: "restaurants",
-                participants: "Kerry Kilpin, Natalie Wells, Imaan Bardien"
-            },
-            {
-                id: 8,
-                group: "Restaurants",
-                name: "Playbook – Session 3",
-                start: new Date(2026, 8, 9),
-                end: new Date(2026, 8, 9),
-                unit: "restaurants",
-                participants: "Tryn & Bistro teams"
+                unit: "marketing",
+                unitLabel: "Marketing",
+                initiatives: [
+                    {
+                        name: "Senior Managers Playbook Training",
+                        sessions: [
+                            { name: "Session 1 (3 hours)", start: null, end: null, scheduled: false },
+                            { name: "Session 2 (3 hours)", start: null, end: null, scheduled: false },
+                            { name: "Session 3 (3 hours)", start: null, end: null, scheduled: false }
+                        ]
+                    }
+                ]
             }
         ];
 
-        // Sort by group, then by date
-        const groupOrder = { "Hotel": 0, "Restaurants": 1, "Spa": 2, "Support": 3, "Group": 4 };
-        data.sort((a, b) => {
-            const groupDiff = groupOrder[a.group] - groupOrder[b.group];
-            if (groupDiff !== 0) return groupDiff;
-            return a.start - b.start;
+        // Collect all scheduled dates
+        const allDates = [];
+        structure.forEach(unit => {
+            unit.initiatives.forEach(init => {
+                init.sessions.forEach(session => {
+                    if (session.scheduled && session.start && session.end) {
+                        allDates.push(session.start, session.end);
+                    }
+                });
+            });
         });
 
-        const svg = document.getElementById("gantt");
-        const margin = { top: 40, right: 20, bottom: 40, left: 280 };
-        const width = 1200;
-        const height = 500;
-        const chartWidth = width - margin.left - margin.right;
-        const chartHeight = height - margin.top - margin.bottom;
-
-        // Calculate date range
-        const allDates = data.flatMap(d => [d.start, d.end]);
         const minDate = new Date(Math.min(...allDates));
         const maxDate = new Date(Math.max(...allDates));
 
-        // Extend range by a few days on each side for padding
         minDate.setDate(minDate.getDate() - 2);
         maxDate.setDate(maxDate.getDate() + 2);
+
+        const svg = document.getElementById("gantt");
+        const margin = { top: 40, right: 20, bottom: 40, left: 380 };
+        const width = 1400;
+        const rowHeight = 22;
+
+        // Calculate total row count first
+        let totalRows = 0;
+        structure.forEach(unit => {
+            totalRows++; // unit header
+            unit.initiatives.forEach(initiative => {
+                totalRows++; // initiative header
+                totalRows += initiative.sessions.length; // sessions
+            });
+            totalRows += 0.5; // spacing between units
+        });
+
+        const height = margin.top + (totalRows * rowHeight) + margin.bottom;
+        const chartWidth = width - margin.left - margin.right;
+        const chartHeight = height - margin.top - margin.bottom;
 
         const daysDiff = Math.ceil((maxDate - minDate) / (1000 * 60 * 60 * 24));
         const pixelsPerDay = chartWidth / daysDiff;
 
-        // Helper function to get x position for a date
         function getXPosition(date) {
             const days = Math.floor((date - minDate) / (1000 * 60 * 60 * 24));
             return margin.left + days * pixelsPerDay;
         }
 
-        // Draw background grid and month lines
+        // Draw grid
         for (let i = 0; i <= daysDiff; i++) {
             const date = new Date(minDate);
             date.setDate(date.getDate() + i);
@@ -330,15 +597,11 @@
             line.setAttribute("y1", margin.top);
             line.setAttribute("x2", x);
             line.setAttribute("y2", height - margin.bottom);
-            line.setAttribute("class", "grid-line");
+            line.setAttribute("class", date.getDate() === 1 && i > 0 ? "month-separator" : "grid-line");
             svg.appendChild(line);
-
-            if (date.getDate() === 1 && i > 0) {
-                line.setAttribute("class", "month-separator");
-            }
         }
 
-        // Draw date labels at top
+        // Draw date labels
         for (let i = 0; i <= daysDiff; i++) {
             const date = new Date(minDate);
             date.setDate(date.getDate() + i);
@@ -357,77 +620,110 @@
             }
         }
 
-        // Draw task bars with group headers
-        const rowHeight = chartHeight / data.length;
-        let lastGroup = null;
-        let groupStartIndex = 0;
+        // Draw hierarchy
+        let rowIndex = 0;
 
-        data.forEach((task, index) => {
-            const y = margin.top + index * rowHeight + rowHeight / 2;
+        structure.forEach(unit => {
+            // Primary header (unit)
+            const unitY = margin.top + rowIndex * rowHeight;
+            const unitLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            unitLabel.setAttribute("x", margin.left - 12);
+            unitLabel.setAttribute("y", unitY + 14);
+            unitLabel.setAttribute("text-anchor", "end");
+            unitLabel.setAttribute("class", "label-primary");
+            unitLabel.textContent = unit.unitLabel;
+            svg.appendChild(unitLabel);
+            rowIndex++;
 
-            // Draw group label if group changed
-            if (task.group !== lastGroup) {
-                const groupLabelX = margin.left - 12;
-                const groupLabelY = margin.top + index * rowHeight + 12;
+            unit.initiatives.forEach(initiative => {
+                // Secondary header (initiative)
+                const initY = margin.top + rowIndex * rowHeight;
+                const initLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                initLabel.setAttribute("x", margin.left - 12);
+                initLabel.setAttribute("y", initY + 14);
+                initLabel.setAttribute("text-anchor", "end");
+                initLabel.setAttribute("class", "label-secondary");
+                initLabel.textContent = initiative.name;
+                svg.appendChild(initLabel);
+                rowIndex++;
 
-                const groupLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                groupLabel.setAttribute("x", groupLabelX);
-                groupLabel.setAttribute("y", groupLabelY);
-                groupLabel.setAttribute("text-anchor", "end");
-                groupLabel.setAttribute("class", "group-label");
-                groupLabel.textContent = task.group;
-                svg.appendChild(groupLabel);
+                initiative.sessions.forEach(session => {
+                    // Tertiary (session)
+                    const sessY = margin.top + rowIndex * rowHeight;
+                    const sessLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    sessLabel.setAttribute("x", margin.left - 12);
+                    sessLabel.setAttribute("y", sessY + 14);
+                    sessLabel.setAttribute("text-anchor", "end");
+                    sessLabel.setAttribute("class", session.scheduled ? "label-tertiary" : "label-unscheduled");
+                    sessLabel.textContent = session.name;
+                    svg.appendChild(sessLabel);
 
-                lastGroup = task.group;
-            }
+                    // Bar (only if scheduled)
+                    if (session.scheduled && session.start && session.end) {
+                        const startX = getXPosition(session.start);
+                        const endX = getXPosition(session.end);
+                        const barWidth = Math.max(endX - startX, 6);
 
-            const startX = getXPosition(task.start);
-            const endX = getXPosition(task.end);
-            const barWidth = Math.max(endX - startX, 8);
+                        const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                        bar.setAttribute("x", startX);
+                        bar.setAttribute("y", sessY - 7);
+                        bar.setAttribute("width", barWidth);
+                        bar.setAttribute("height", 14);
+                        bar.setAttribute("class", `bar ${unit.unit}`);
 
-            // Draw task label
-            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            label.setAttribute("x", margin.left - 12);
-            label.setAttribute("y", y + 4);
-            label.setAttribute("text-anchor", "end");
-            label.setAttribute("class", "task-label");
-            label.textContent = task.name;
-            svg.appendChild(label);
+                        bar.addEventListener("mouseenter", (e) => showTooltip(e, session));
+                        bar.addEventListener("mouseleave", hideTooltip);
 
-            // Draw bar
-            const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-            bar.setAttribute("x", startX);
-            bar.setAttribute("y", y - 12);
-            bar.setAttribute("width", barWidth);
-            bar.setAttribute("height", 24);
-            bar.setAttribute("class", `bar ${task.unit}`);
-            bar.setAttribute("data-id", task.id);
+                        svg.appendChild(bar);
+                    }
+                    rowIndex++;
+                });
+            });
 
-            bar.addEventListener("mouseenter", (e) => showTooltip(e, task));
-            bar.addEventListener("mouseleave", hideTooltip);
-
-            svg.appendChild(bar);
+            rowIndex += 0.5; // Spacing between units
         });
 
-        // Adjust SVG height to fit all bars
-        const actualHeight = margin.top + data.length * rowHeight + margin.bottom;
-        svg.setAttribute("height", actualHeight);
+        svg.setAttribute("width", width);
+        svg.setAttribute("height", height);
 
-        // Tooltip functionality
+        // Tooltip
         const tooltip = document.getElementById("tooltip");
 
-        function showTooltip(e, task) {
+        function showTooltip(e, session) {
             const dateFormat = (date) => {
-                return date.toLocaleDateString("en-GB", { weekday: "short", day: "2-digit", month: "short", year: "numeric" });
+                return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
             };
 
-            const startStr = dateFormat(task.start);
-            const endStr = dateFormat(task.end);
-            const duration = task.start.getTime() === task.end.getTime() ?
+            const startStr = dateFormat(session.start);
+            const endStr = dateFormat(session.end);
+            const duration = session.start.getTime() === session.end.getTime() ?
                 startStr :
                 `${startStr} – ${endStr}`;
 
-            tooltip.innerHTML = `<strong>${task.name}</strong><br>${duration}<br><em>${task.participants}</em>`;
+            let tooltipText = `${session.name} • ${duration}`;
+
+            // If there are multiple people, show each person's details
+            if (session.people && session.people.length > 0) {
+                tooltipText = "";
+                session.people.forEach(person => {
+                    if (tooltipText) tooltipText += "\n";
+                    tooltipText += `${person.name} • ${startStr} • ${person.startTime}–${person.endTime}`;
+                    if (session.venue && session.venue !== "TBD") {
+                        tooltipText += ` • ${session.venue}`;
+                    }
+                });
+            } else {
+                if (session.startTime && session.startTime !== "TBD") {
+                    tooltipText += ` • ${session.startTime}–${session.endTime}`;
+                }
+
+                if (session.venue && session.venue !== "TBD") {
+                    tooltipText += ` • ${session.venue}`;
+                }
+            }
+
+            tooltip.textContent = tooltipText;
+            tooltip.style.whiteSpace = "pre-line";
             tooltip.classList.add("visible");
 
             const rect = e.target.getBoundingClientRect();
