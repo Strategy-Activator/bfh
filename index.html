@@ -129,6 +129,19 @@
             font-style: normal;
         }
 
+        .label-invoice {
+            font-size: 11px;
+            font-style: normal;
+        }
+
+        .label-invoice.paid {
+            fill: #16a34a;
+        }
+
+        .label-invoice.unpaid {
+            fill: #dc2626;
+        }
+
         .grid-line {
             stroke: #e8e8e8;
             stroke-width: 1;
@@ -435,7 +448,7 @@
                     },
                     {
                         name: "Senior Managers Hotel Operations",
-                        participants: "Ffyona, Shaun, Kamiela, Exec Housekeeper",
+                        participants: "Ffyona, Shaun, Kamiela, Exec Housekeeper, Noleen",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -540,6 +553,7 @@
                     {
                         name: "Hotel Operations Manager coaching",
                         participants: "Natalie",
+                        invoice: { number: 506, paid: "16-Jul" },
                         sessions: [
                             { name: "Round 1 – 4 Sessions (1hr)", start: null, end: null, scheduled: false },
                             { name: "Round 2 – 9 Sessions (1hr)", start: null, end: null, scheduled: false }
@@ -548,6 +562,7 @@
                     {
                         name: "Revenue Manager coaching",
                         participants: "Hein",
+                        invoice: { number: 502, paid: "10-Jul" },
                         sessions: [
                             { name: "5 Sessions (1hr)", start: null, end: null, scheduled: false }
                         ]
@@ -567,6 +582,7 @@
                     {
                         name: "Restaurant Manager coaching",
                         participants: "Natalie",
+                        invoice: { number: 501, paid: "03-Jul" },
                         sessions: [
                             { name: "3 Sessions (1hr)", start: null, end: null, scheduled: false }
                         ]
@@ -574,6 +590,7 @@
                     {
                         name: "New Starters Playbook Intro",
                         participants: "Emile, Imaan, Marisa, Piwe, Siwe",
+                        invoice: { number: 512, paid: null },
                         sessions: [
                             {
                                 name: "3 Sessions (2hrs)",
@@ -666,6 +683,7 @@
                     {
                         name: "Coaching & Mentoring",
                         participants: "Monique",
+                        invoice: { number: 510, paid: null },
                         sessions: [
                             {
                                 name: "12 Sessions (1hr)",
@@ -689,6 +707,7 @@
                     {
                         name: "Senior team update",
                         participants: "Bennie, Quanita (Pinkie), Asst Spa Manager",
+                        invoice: { number: 510, paid: null },
                         sessions: [
                             {
                                 name: "6 Sessions (3hrs)",
@@ -718,6 +737,7 @@
                     {
                         name: "New Starters Playbook Intro 1",
                         participants: "Anton, Ryno, Rika, Jessica, Ffyona",
+                        invoice: { number: 498, paid: "29-May" },
                         sessions: [
                             {
                                 name: "3 Sessions (3hrs)",
@@ -817,6 +837,7 @@
             totalRows++; // unit header
             walkInitiatives(unit.initiatives, initiative => {
                 totalRows++; // initiative header
+                if (initiative.invoice) totalRows++; // invoice row if exists
                 if (initiative.participants) totalRows++; // participants row if exists
                 totalRows += initiative.sessions.length; // sessions
             }, () => {
@@ -944,6 +965,20 @@
                 initLabel.textContent = initiative.name;
                 svg.appendChild(initLabel);
                 rowIndex++;
+
+                // Display invoice/payment status if it exists (shown above participants)
+                if (initiative.invoice) {
+                    const invY = margin.top + rowIndex * rowHeight;
+                    const invLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    invLabel.setAttribute("x", margin.left - 12);
+                    invLabel.setAttribute("y", invY + 14);
+                    invLabel.setAttribute("text-anchor", "end");
+                    invLabel.setAttribute("class", `label-invoice ${initiative.invoice.paid ? "paid" : "unpaid"}`);
+                    const paidText = initiative.invoice.paid ? `Paid ${initiative.invoice.paid}` : "Not paid";
+                    invLabel.textContent = `Invoice ${initiative.invoice.number} • ${paidText}`;
+                    svg.appendChild(invLabel);
+                    rowIndex++;
+                }
 
                 // Display participants if they exist
                 if (initiative.participants) {
