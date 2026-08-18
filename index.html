@@ -748,7 +748,7 @@
                                 ]
                             },
                             {
-                                name: "1:1 Round (2hrs)",
+                                name: "1:1 Round (1hr)",
                                 start: new Date(2026, 7, 21),
                                 end: new Date(2026, 7, 21),
                                 scheduled: true,
@@ -800,35 +800,18 @@
             });
         }
 
-        // Collect all scheduled dates
-        const allDates = [];
-        structure.forEach(unit => {
-            walkInitiatives(unit.initiatives, init => {
-                init.sessions.forEach(session => {
-                    if (session.instances && session.instances.length > 0) {
-                        session.instances.forEach(instance => {
-                            if (instance.start && instance.end) allDates.push(instance.start, instance.end);
-                        });
-                    } else if (session.scheduled && session.start && session.end) {
-                        allDates.push(session.start, session.end);
-                    }
-                });
-            });
-        });
-
-        const minDate = new Date(Math.min(...allDates));
-        const maxDate = new Date(Math.max(...allDates));
+        // Axis bounds pinned to the fiscal year itself (Jul 2026 – Jun 2027), rather than
+        // computed from the earliest/latest scheduled session. That keeps the first and
+        // last months full-width and never lets a session outside the FY (or the old
+        // +/-2 day padding) spill an extra month label off either edge.
+        const minDate = new Date(2026, 6, 1); // 1 Jul 2026
+        const maxDate = new Date(2027, 5, 30); // 30 Jun 2027
 
         // Used to grey out sessions that have already happened — recalculated on every page load
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        minDate.setDate(minDate.getDate() - 2);
-        maxDate.setDate(maxDate.getDate() + 2);
-
         const svg = document.getElementById("gantt");
-        const margin = { top: 40, right: 20, bottom: 40, left: 380 };
-        const width = 1400;
         const rowHeight = 22;
 
         // Calculate total row count first
@@ -846,8 +829,54 @@
             totalRows += 0.5; // spacing between units
         });
 
+        // Trim the label column to the widest label actually present, instead of a fixed
+        // guess — measured with a canvas using the same font the SVG labels render with,
+        // so it tracks whatever text ends up in the data (renames, longer names, etc).
+        const FONT_FAMILY = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+        const measureCtx = document.createElement("canvas").getContext("2d");
+        let maxLabelWidth = 0;
+        function trackLabelWidth(text, font) {
+            measureCtx.font = font;
+            const w = measureCtx.measureText(text).width;
+            if (w > maxLabelWidth) maxLabelWidth = w;
+        }
+        structure.forEach(unit => {
+            trackLabelWidth(unit.unitLabel.toUpperCase(), `700 13px ${FONT_FAMILY}`);
+            walkInitiatives(unit.initiatives, initiative => {
+                const scheduledCount = initiative.sessions.filter(s => s.scheduled || (s.instances && s.instances.length > 0)).length;
+                const initWip = scheduledCount > 0 && scheduledCount < initiative.sessions.length;
+                trackLabelWidth(initiative.name, `${initWip ? "italic " : ""}600 12px ${FONT_FAMILY}`);
+
+                if (initiative.invoice) {
+                    const paidText = initiative.invoice.paid ? `Paid ${initiative.invoice.paid}` : "Not paid";
+                    trackLabelWidth(`Invoice ${initiative.invoice.number} • ${paidText}`, `11px ${FONT_FAMILY}`);
+                }
+                if (initiative.participants) {
+                    trackLabelWidth(initiative.participants, `12px ${FONT_FAMILY}`);
+                }
+                initiative.sessions.forEach(session => {
+                    let sessItalic = false;
+                    if (session.instances && session.instances.length > 0) {
+                        sessItalic = false;
+                    } else if (!session.scheduled) {
+                        sessItalic = true;
+                    } else if (session.people) {
+                        const expectedCount = countParticipants(initiative.participants);
+                        sessItalic = expectedCount > 0 && session.people.length < expectedCount;
+                    }
+                    trackLabelWidth(session.name, `${sessItalic ? "italic " : ""}12px ${FONT_FAMILY}`);
+                });
+            }, subgroupName => {
+                trackLabelWidth(subgroupName, `700 12px ${FONT_FAMILY}`);
+            });
+        });
+
+        const margin = { top: 40, right: 20, bottom: 40, left: Math.ceil(maxLabelWidth) + 24 };
+        const CHART_PLOT_WIDTH = 1000; // fixed date-axis width, independent of the label column's width
+        const width = margin.left + CHART_PLOT_WIDTH + margin.right;
+
         const height = margin.top + (totalRows * rowHeight) + margin.bottom;
-        const chartWidth = width - margin.left - margin.right;
+        const chartWidth = CHART_PLOT_WIDTH;
         const chartHeight = height - margin.top - margin.bottom;
 
         const daysDiff = Math.ceil((maxDate - minDate) / (1000 * 60 * 60 * 24));
@@ -865,6 +894,26 @@
                 .map(s => s.trim())
                 .filter(s => s && !/vacant/i.test(s))
                 .length;
+        }
+
+        // Marker width scales with how long the session actually runs: the base width
+        // (30% narrower than the old fixed 6px dot) applies to 1hr sessions, doubling for
+        // 2hr and tripling for 3hr. Anything without a clean 1/2/3hr duration (multi-day
+        // date-range bars, odd-length blocks) falls back to the old date-span sizing.
+        const BASE_MARKER_WIDTH = 6 * 0.7;
+
+        function getDurationHours(startTime, endTime) {
+            if (!startTime || !endTime) return null;
+            const [sh, sm] = startTime.split(":").map(Number);
+            const [eh, em] = endTime.split(":").map(Number);
+            return ((eh * 60 + em) - (sh * 60 + sm)) / 60;
+        }
+
+        function getMarkerWidth(hours) {
+            if (hours === 1) return BASE_MARKER_WIDTH;
+            if (hours === 2) return BASE_MARKER_WIDTH * 2;
+            if (hours === 3) return BASE_MARKER_WIDTH * 3;
+            return null;
         }
 
         function isVenueConfirmed(venue) {
@@ -1024,7 +1073,8 @@
                             const endX = getXPosition(instance.end);
                             const venueConfirmed = isVenueConfirmed(instance.venue);
                             const isCompleted = instance.end < today;
-                            const barWidth = Math.max(endX - startX, 6);
+                            const markerWidth = getMarkerWidth(getDurationHours(instance.startTime, instance.endTime));
+                            const barWidth = markerWidth !== null ? markerWidth : Math.max(endX - startX, BASE_MARKER_WIDTH);
 
                             guideLines.push({
                                 y: sessY + (rowHeight / 2),
@@ -1066,7 +1116,14 @@
                         // Already happened as of today — render grey instead of the department colour
                         const isCompleted = session.end < today;
 
-                        const barWidth = Math.max(endX - startX, 6);
+                        // When people share one row (each in their own slot), size the marker by
+                        // each person's individual slot length rather than the row's overall elapsed
+                        // span — a row of five 1hr slots stretched across 6 clock-hours should still
+                        // read as "1hr each", not render as one wide 6hr block.
+                        const personWithTime = session.people && session.people.find(p => p.startTime && p.endTime);
+                        const durationSource = personWithTime || session;
+                        const markerWidth = getMarkerWidth(getDurationHours(durationSource.startTime, durationSource.endTime));
+                        const barWidth = markerWidth !== null ? markerWidth : Math.max(endX - startX, BASE_MARKER_WIDTH);
 
                         // Store guide line info (position at center of row for alignment)
                         // Line stops just before the marker to avoid bisecting it
