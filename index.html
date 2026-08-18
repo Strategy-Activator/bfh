@@ -83,6 +83,14 @@
             fill: #000;
             font-weight: 700;
             letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .label-subgroup {
+            font-size: 12px;
+            fill: #1a1a1a;
+            font-weight: 700;
+            letter-spacing: 0.2px;
         }
 
         .label-secondary {
@@ -337,7 +345,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Outcomes (2hrs)",
+                                name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
                                 start: new Date(2026, 7, 25),
                                 end: new Date(2026, 7, 25),
                                 startTime: "08:00",
@@ -359,7 +367,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 2 – Indicators (2hrs)",
+                                name: "1:1 Mentoring Round 2 – Indicators (1hr)",
                                 start: new Date(2026, 8, 14),
                                 end: new Date(2026, 8, 14),
                                 venue: "Ruby Room",
@@ -385,7 +393,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Outcomes (6hrs)",
+                                name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
                                 start: new Date(2026, 7, 25),
                                 end: new Date(2026, 7, 25),
                                 startTime: "10:00",
@@ -410,7 +418,7 @@
                                 scheduled: true
                             },
                             {
-                                name: "1:1 Mentoring Round 2 – Indicators (6hrs)",
+                                name: "1:1 Mentoring Round 2 – Indicators (1hr)",
                                 start: new Date(2026, 8, 14),
                                 end: new Date(2026, 8, 14),
                                 venue: "Ruby Room",
@@ -496,7 +504,7 @@
                                 scheduled: false
                             },
                             {
-                                name: "1:1 Mentoring Round 1 – Outcomes (1hr each)",
+                                name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
                                 start: new Date(2026, 7, 17),
                                 end: new Date(2026, 7, 19),
                                 scheduled: true,
@@ -512,7 +520,7 @@
                                 scheduled: false
                             },
                             {
-                                name: "1:1 Mentoring Round 2 – Indicators (1hr each)",
+                                name: "1:1 Mentoring Round 2 – Indicators (1hr)",
                                 start: new Date(2026, 7, 28),
                                 end: new Date(2026, 7, 28),
                                 scheduled: true,
@@ -533,38 +541,21 @@
                         name: "Hotel Operations Manager coaching",
                         participants: "Natalie",
                         sessions: [
-                            { name: "Session 1 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 3 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 4 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 1 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 2 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 3 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 4 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 5 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 6 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 7 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 8 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Round 2 – Session 9 (1hr)", start: null, end: null, scheduled: false }
+                            { name: "Round 1 – 4 Sessions (1hr)", start: null, end: null, scheduled: false },
+                            { name: "Round 2 – 9 Sessions (1hr)", start: null, end: null, scheduled: false }
                         ]
                     },
                     {
                         name: "Revenue Manager coaching",
                         participants: "Hein",
                         sessions: [
-                            { name: "Session 1 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 3 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 4 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 5 (1hr)", start: null, end: null, scheduled: false }
+                            { name: "5 Sessions (1hr)", start: null, end: null, scheduled: false }
                         ]
                     },
                     {
                         name: "New Starters Playbook Intro",
                         sessions: [
-                            { name: "Session 1 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 3 (2hrs)", start: null, end: null, scheduled: false }
+                            { name: "3 Sessions (2hrs)", start: null, end: null, scheduled: false }
                         ]
                     }
                 ]
@@ -574,89 +565,96 @@
                 unitLabel: "Restaurants",
                 initiatives: [
                     {
+                        name: "Restaurant Manager coaching",
+                        participants: "Natalie",
+                        sessions: [
+                            { name: "3 Sessions (1hr)", start: null, end: null, scheduled: false }
+                        ]
+                    },
+                    {
                         name: "New Starters Playbook Intro",
                         participants: "Emile, Imaan, Marisa, Piwe, Siwe",
                         sessions: [
                             {
-                                name: "Session 1 (2hrs)",
-                                start: new Date(2026, 7, 19),
-                                end: new Date(2026, 7, 19),
-                                startTime: "14:00",
-                                endTime: "16:00",
-                                venue: "Ruby Room",
-                                scheduled: true
-                            },
-                            {
-                                name: "Session 2 (2hrs)",
-                                start: new Date(2026, 7, 26),
-                                end: new Date(2026, 7, 26),
-                                startTime: "14:00",
-                                endTime: "16:00",
-                                venue: "Tryn",
-                                scheduled: true
-                            },
-                            {
-                                name: "Session 3 (2hrs)",
-                                start: new Date(2026, 8, 9),
-                                end: new Date(2026, 8, 9),
-                                startTime: "12:00",
-                                endTime: "14:00",
-                                venue: "Ruby Room",
-                                scheduled: true
+                                name: "3 Sessions (2hrs)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 7, 19), end: new Date(2026, 7, 19), startTime: "14:00", endTime: "16:00", venue: "Ruby Room" },
+                                    { label: "Session 2", start: new Date(2026, 7, 26), end: new Date(2026, 7, 26), startTime: "14:00", endTime: "16:00", venue: "Tryn" },
+                                    { label: "Session 3", start: new Date(2026, 8, 9), end: new Date(2026, 8, 9), startTime: "12:00", endTime: "14:00", venue: "Ruby Room" }
+                                ]
                             }
                         ]
                     },
                     {
-                        name: "New Starters Playbook Intro – Bistro",
-                        sessions: [
-                            { name: "Session 1 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (2hrs)", start: null, end: null, scheduled: false }
+                        subgroup: "Bistro",
+                        initiatives: [
+                            {
+                                name: "New Starters Playbook Intro",
+                                sessions: [
+                                    { name: "2 Sessions (2hrs)", start: null, end: null, scheduled: false }
+                                ]
+                            },
+                            {
+                                name: "Team updates",
+                                sessions: [
+                                    {
+                                        name: "2 Sessions (3hrs)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31) },
+                                            { label: "Session 2", start: new Date(2027, 3, 1), end: new Date(2027, 3, 30) }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                name: "Senior Team check-ins",
+                                sessions: [
+                                    {
+                                        name: "3 Sessions (2hrs)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31) },
+                                            { label: "Session 2", start: new Date(2027, 2, 1), end: new Date(2027, 2, 31) },
+                                            { label: "Session 3", start: new Date(2027, 5, 1), end: new Date(2027, 5, 30) }
+                                        ]
+                                    }
+                                ]
+                            }
                         ]
                     },
                     {
-                        name: "New Starters Playbook Intro – Tryn",
-                        sessions: [
-                            { name: "Session 1 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (2hrs)", start: null, end: null, scheduled: false }
-                        ]
-                    },
-                    {
-                        name: "Playbook Updates – Bistro",
-                        sessions: [
-                            { name: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31), scheduled: true },
-                            { name: "Session 2", start: new Date(2027, 3, 1), end: new Date(2027, 3, 30), scheduled: true }
-                        ]
-                    },
-                    {
-                        name: "Senior Team check-ins – Bistro",
-                        sessions: [
-                            { name: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31), scheduled: true },
-                            { name: "Session 2", start: new Date(2027, 2, 1), end: new Date(2027, 2, 31), scheduled: true },
-                            { name: "Session 3", start: new Date(2027, 5, 1), end: new Date(2027, 5, 30), scheduled: true }
-                        ]
-                    },
-                    {
-                        name: "Playbook Updates – Tryn",
-                        sessions: [
-                            { name: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31), scheduled: true },
-                            { name: "Session 2", start: new Date(2027, 3, 1), end: new Date(2027, 3, 30), scheduled: true }
-                        ]
-                    },
-                    {
-                        name: "Senior Team check-ins – Tryn",
-                        sessions: [
-                            { name: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31), scheduled: true },
-                            { name: "Session 2", start: new Date(2027, 2, 1), end: new Date(2027, 2, 31), scheduled: true },
-                            { name: "Session 3", start: new Date(2027, 5, 1), end: new Date(2027, 5, 30), scheduled: true }
-                        ]
-                    },
-                    {
-                        name: "Restaurant Manager coaching",
-                        participants: "Natalie",
-                        sessions: [
-                            { name: "Session 1 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (1hr)", start: null, end: null, scheduled: false },
-                            { name: "Session 3 (1hr)", start: null, end: null, scheduled: false }
+                        subgroup: "Tryn",
+                        initiatives: [
+                            {
+                                name: "New Starters Playbook Intro",
+                                sessions: [
+                                    { name: "2 Sessions (2hrs)", start: null, end: null, scheduled: false }
+                                ]
+                            },
+                            {
+                                name: "Team updates",
+                                sessions: [
+                                    {
+                                        name: "2 Sessions (3hrs)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31) },
+                                            { label: "Session 2", start: new Date(2027, 3, 1), end: new Date(2027, 3, 30) }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                name: "Senior Team check-ins",
+                                sessions: [
+                                    {
+                                        name: "3 Sessions (2hrs)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31) },
+                                            { label: "Session 2", start: new Date(2027, 2, 1), end: new Date(2027, 2, 31) },
+                                            { label: "Session 3", start: new Date(2027, 5, 1), end: new Date(2027, 5, 30) }
+                                        ]
+                                    }
+                                ]
+                            }
                         ]
                     }
                 ]
@@ -669,38 +667,46 @@
                         name: "Coaching & Mentoring",
                         participants: "Monique",
                         sessions: [
-                            { name: "Session 1 (1hr)", start: new Date(2026, 6, 23), end: new Date(2026, 6, 23), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 2 (1hr)", start: new Date(2026, 7, 11), end: new Date(2026, 7, 11), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 3 (1hr)", start: new Date(2026, 8, 8), end: new Date(2026, 8, 8), startTime: "12:30", endTime: "13:30", venue: "Tbc", scheduled: true },
-                            { name: "Session 4 (1hr)", start: new Date(2026, 9, 9), end: new Date(2026, 9, 9), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 5 (1hr)", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "09:00", endTime: "10:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 6 (1hr)", start: new Date(2026, 11, 8), end: new Date(2026, 11, 8), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 7 (1hr)", start: new Date(2027, 0, 19), end: new Date(2027, 0, 19), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 8 (1hr)", start: new Date(2027, 1, 9), end: new Date(2027, 1, 9), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 9 (1hr)", start: new Date(2027, 2, 9), end: new Date(2027, 2, 9), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 10 (1hr)", start: new Date(2027, 3, 6), end: new Date(2027, 3, 6), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 11 (1hr)", start: new Date(2027, 4, 11), end: new Date(2027, 4, 11), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 12 (1hr)", start: new Date(2027, 5, 8), end: new Date(2027, 5, 8), startTime: "08:00", endTime: "09:00", venue: "Tbc", scheduled: true }
+                            {
+                                name: "12 Sessions (1hr)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 6, 23), end: new Date(2026, 6, 23), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 2", start: new Date(2026, 7, 11), end: new Date(2026, 7, 11), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 3", start: new Date(2026, 8, 8), end: new Date(2026, 8, 8), startTime: "12:30", endTime: "13:30", venue: "Tryn" },
+                                    { label: "Session 4", start: new Date(2026, 9, 9), end: new Date(2026, 9, 9), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 5", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "09:00", endTime: "10:00", venue: "Tryn" },
+                                    { label: "Session 6", start: new Date(2026, 11, 8), end: new Date(2026, 11, 8), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 7", start: new Date(2027, 0, 19), end: new Date(2027, 0, 19), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 8", start: new Date(2027, 1, 9), end: new Date(2027, 1, 9), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 9", start: new Date(2027, 2, 9), end: new Date(2027, 2, 9), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 10", start: new Date(2027, 3, 6), end: new Date(2027, 3, 6), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 11", start: new Date(2027, 4, 11), end: new Date(2027, 4, 11), startTime: "08:00", endTime: "09:00", venue: "Tryn" },
+                                    { label: "Session 12", start: new Date(2027, 5, 8), end: new Date(2027, 5, 8), startTime: "08:00", endTime: "09:00", venue: "Tryn" }
+                                ]
+                            }
                         ]
                     },
                     {
                         name: "Senior team update",
                         participants: "Bennie, Quanita (Pinkie), Asst Spa Manager",
                         sessions: [
-                            { name: "Session 1 (1hr)", start: new Date(2026, 7, 14), end: new Date(2026, 7, 14), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 2 (1hr)", start: new Date(2026, 9, 16), end: new Date(2026, 9, 16), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 3 (1hr)", start: new Date(2026, 11, 4), end: new Date(2026, 11, 4), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 4 (1hr)", start: new Date(2027, 1, 12), end: new Date(2027, 1, 12), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 5 (1hr)", start: new Date(2027, 3, 9), end: new Date(2027, 3, 9), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true },
-                            { name: "Session 6 (1hr)", start: new Date(2027, 5, 11), end: new Date(2027, 5, 11), startTime: "09:00", endTime: "12:00", venue: "Tbc", scheduled: true }
+                            {
+                                name: "6 Sessions (3hrs)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 7, 14), end: new Date(2026, 7, 14), startTime: "09:00", endTime: "12:00", venue: "Villa 25" },
+                                    { label: "Session 2", start: new Date(2026, 9, 16), end: new Date(2026, 9, 16), startTime: "09:00", endTime: "12:00", venue: "Tbc" },
+                                    { label: "Session 3", start: new Date(2026, 11, 4), end: new Date(2026, 11, 4), startTime: "09:00", endTime: "12:00", venue: "Tbc" },
+                                    { label: "Session 4", start: new Date(2027, 1, 12), end: new Date(2027, 1, 12), startTime: "09:00", endTime: "12:00", venue: "Tbc" },
+                                    { label: "Session 5", start: new Date(2027, 3, 9), end: new Date(2027, 3, 9), startTime: "09:00", endTime: "12:00", venue: "Tbc" },
+                                    { label: "Session 6", start: new Date(2027, 5, 11), end: new Date(2027, 5, 11), startTime: "09:00", endTime: "12:00", venue: "Tbc" }
+                                ]
+                            }
                         ]
                     },
                     {
                         name: "New Starters Playbook Intro",
                         sessions: [
-                            { name: "Session 1 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 3 (2hrs)", start: null, end: null, scheduled: false }
+                            { name: "3 Sessions (2hrs)", start: null, end: null, scheduled: false }
                         ]
                     }
                 ]
@@ -710,57 +716,32 @@
                 unitLabel: "Support",
                 initiatives: [
                     {
-                        name: "Support Onboarding",
+                        name: "New Starters Playbook Intro 1",
                         participants: "Anton, Ryno, Rika, Jessica, Ffyona",
                         sessions: [
                             {
-                                name: "Session 1 (3hrs)",
-                                start: new Date(2026, 7, 17),
-                                end: new Date(2026, 7, 17),
-                                startTime: "09:30",
-                                endTime: "12:30",
-                                venue: "Cuvee",
-                                scheduled: true
+                                name: "3 Sessions (3hrs)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 7, 17), end: new Date(2026, 7, 17), startTime: "09:30", endTime: "12:30", venue: "Cuvee" },
+                                    { label: "Session 2", start: new Date(2026, 7, 26), end: new Date(2026, 7, 26), startTime: "09:00", endTime: "12:00", venue: "Coach Building" },
+                                    { label: "Session 3", start: new Date(2026, 8, 9), end: new Date(2026, 8, 9), startTime: "08:30", endTime: "11:30", venue: "Coach Building" }
+                                ]
                             },
                             {
-                                name: "Session 2 (3hrs)",
-                                start: new Date(2026, 7, 26),
-                                end: new Date(2026, 7, 26),
-                                startTime: "09:00",
-                                endTime: "12:00",
-                                venue: "Coach Building",
-                                scheduled: true
-                            },
-                            {
-                                name: "Session 3 (3hrs)",
-                                start: new Date(2026, 8, 9),
-                                end: new Date(2026, 8, 9),
-                                startTime: "08:30",
-                                endTime: "11:30",
-                                venue: "Coach Building",
-                                scheduled: true
-                            },
-                            {
-                                name: "1:1 – Anton (2hrs)",
+                                name: "1:1 Round (2hrs)",
                                 start: new Date(2026, 7, 21),
                                 end: new Date(2026, 7, 21),
-                                startTime: "09:00",
-                                endTime: "11:00",
-                                venue: "Microsoft Teams",
-                                scheduled: true
-                            },
-                            { name: "1:1 – Ryno (1hr)", start: null, end: null, scheduled: false },
-                            { name: "1:1 – Rika (1hr)", start: null, end: null, scheduled: false },
-                            { name: "1:1 – Jessica (1hr)", start: null, end: null, scheduled: false },
-                            { name: "1:1 – Ffyona (1hr)", start: null, end: null, scheduled: false }
+                                scheduled: true,
+                                people: [
+                                    { name: "Anton", startTime: "09:00", endTime: "11:00", venue: "Microsoft Teams" }
+                                ]
+                            }
                         ]
                     },
                     {
-                        name: "New Starters Playbook Intro",
+                        name: "New Starters Playbook Intro 2",
                         sessions: [
-                            { name: "Session 1 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 3 (2hrs)", start: null, end: null, scheduled: false }
+                            { name: "3 Sessions (2hrs)", start: null, end: null, scheduled: false }
                         ]
                     }
                 ]
@@ -772,29 +753,43 @@
                     {
                         name: "Playbook Updates",
                         sessions: [
-                            { name: "Session 1 (3hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (3hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 3 (3hrs)", start: null, end: null, scheduled: false }
+                            { name: "3 Sessions (3hrs)", start: null, end: null, scheduled: false }
                         ]
                     },
                     {
                         name: "New Starters Playbook Intro",
                         sessions: [
-                            { name: "Session 1 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 2 (2hrs)", start: null, end: null, scheduled: false },
-                            { name: "Session 3 (2hrs)", start: null, end: null, scheduled: false }
+                            { name: "3 Sessions (2hrs)", start: null, end: null, scheduled: false }
                         ]
                     }
                 ]
             }
         ];
 
+        // Walks a unit's initiatives list, descending into subgroup wrappers
+        // ({ subgroup: "Bistro", initiatives: [...] }) so callers can treat every
+        // initiative the same regardless of whether it sits under a subgroup.
+        function walkInitiatives(items, onInitiative, onSubgroupStart) {
+            items.forEach(item => {
+                if (item.subgroup) {
+                    if (onSubgroupStart) onSubgroupStart(item.subgroup);
+                    walkInitiatives(item.initiatives, onInitiative, onSubgroupStart);
+                } else {
+                    onInitiative(item);
+                }
+            });
+        }
+
         // Collect all scheduled dates
         const allDates = [];
         structure.forEach(unit => {
-            unit.initiatives.forEach(init => {
+            walkInitiatives(unit.initiatives, init => {
                 init.sessions.forEach(session => {
-                    if (session.scheduled && session.start && session.end) {
+                    if (session.instances && session.instances.length > 0) {
+                        session.instances.forEach(instance => {
+                            if (instance.start && instance.end) allDates.push(instance.start, instance.end);
+                        });
+                    } else if (session.scheduled && session.start && session.end) {
                         allDates.push(session.start, session.end);
                     }
                 });
@@ -820,10 +815,12 @@
         let totalRows = 0;
         structure.forEach(unit => {
             totalRows++; // unit header
-            unit.initiatives.forEach(initiative => {
+            walkInitiatives(unit.initiatives, initiative => {
                 totalRows++; // initiative header
                 if (initiative.participants) totalRows++; // participants row if exists
                 totalRows += initiative.sessions.length; // sessions
+            }, () => {
+                totalRows++; // subgroup header row
             });
             totalRows += 0.5; // spacing between units
         });
@@ -922,19 +919,15 @@
         // Draw hierarchy
         let rowIndex = 0;
 
-        structure.forEach(unit => {
-            // Primary header (unit)
-            const unitY = margin.top + rowIndex * rowHeight;
-            const unitLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            unitLabel.setAttribute("x", margin.left - 12);
-            unitLabel.setAttribute("y", unitY + 14);
-            unitLabel.setAttribute("text-anchor", "end");
-            unitLabel.setAttribute("class", "label-primary");
-            unitLabel.textContent = unit.unitLabel;
-            svg.appendChild(unitLabel);
-            rowIndex++;
+        // Anchor node: guide lines get inserted directly before this, so they land behind
+        // every bar/marker (which are appended after it) instead of on top of them.
+        const firstBarAnchor = document.createComment("guide-lines-anchor");
+        svg.appendChild(firstBarAnchor);
 
-            unit.initiatives.forEach(initiative => {
+        // Renders one initiative's header, participants line, and session rows.
+        // Shared by top-level initiatives and initiatives nested under a subgroup
+        // (e.g. Restaurants > Bistro), so both render identically.
+        function renderInitiative(initiative, unit) {
                 // Secondary header (initiative)
                 const initY = margin.top + rowIndex * rowHeight;
                 const initLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -942,8 +935,10 @@
                 initLabel.setAttribute("y", initY + 14);
                 initLabel.setAttribute("text-anchor", "end");
 
-                // Determine scheduling status: work-in-progress if some (but not all) sessions are scheduled
-                const scheduledCount = initiative.sessions.filter(s => s.scheduled).length;
+                // Determine scheduling status: work-in-progress if some (but not all) sessions are scheduled.
+                // A session counts as scheduled if it's flagged directly, or if it's a condensed
+                // row with dated instances (those don't set session.scheduled at the top level).
+                const scheduledCount = initiative.sessions.filter(s => s.scheduled || (s.instances && s.instances.length > 0)).length;
                 const isWip = scheduledCount > 0 && scheduledCount < initiative.sessions.length;
                 initLabel.setAttribute("class", isWip ? "label-secondary-wip" : "label-secondary");
                 initLabel.textContent = initiative.name;
@@ -972,7 +967,9 @@
                     sessLabel.setAttribute("text-anchor", "end");
 
                     let sessClass;
-                    if (!session.scheduled) {
+                    if (session.instances && session.instances.length > 0) {
+                        sessClass = "label-tertiary";
+                    } else if (!session.scheduled) {
                         sessClass = "label-unscheduled";
                     } else if (session.people) {
                         // Partially scheduled: fewer people booked than the initiative's full participant list
@@ -985,8 +982,44 @@
                     sessLabel.textContent = session.name;
                     svg.appendChild(sessLabel);
 
-                    // Bar (only if scheduled)
-                    if (session.scheduled && session.start && session.end) {
+                    // Condensed row: many dated sessions sharing one row, each drawn as its own bar
+                    if (session.instances && session.instances.length > 0) {
+                        session.instances.forEach(instance => {
+                            const startX = getXPosition(instance.start);
+                            const endX = getXPosition(instance.end);
+                            const venueConfirmed = isVenueConfirmed(instance.venue);
+                            const isCompleted = instance.end < today;
+                            const barWidth = Math.max(endX - startX, 6);
+
+                            guideLines.push({
+                                y: sessY + (rowHeight / 2),
+                                startX: margin.left,
+                                endX: startX - 2
+                            });
+
+                            const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                            bar.setAttribute("x", startX);
+                            bar.setAttribute("y", sessY + (rowHeight / 2) - 7);
+                            bar.setAttribute("width", barWidth);
+                            bar.setAttribute("height", 14);
+                            bar.setAttribute("class", `bar ${unit.unit}${venueConfirmed ? "" : " venue-tbc"}${isCompleted ? " completed" : ""}`);
+
+                            const instanceSession = {
+                                name: instance.label || session.name,
+                                start: instance.start,
+                                end: instance.end,
+                                startTime: instance.startTime,
+                                endTime: instance.endTime,
+                                venue: instance.venue,
+                                scheduled: true
+                            };
+                            bar.addEventListener("mouseover", (e) => showTooltip(e, instanceSession));
+                            bar.addEventListener("mouseout", hideTooltip);
+
+                            svg.appendChild(bar);
+                        });
+                    } else if (session.scheduled && session.start && session.end) {
+                        // Bar (only if scheduled)
                         const startX = getXPosition(session.start);
                         const endX = getXPosition(session.end);
 
@@ -1022,12 +1055,44 @@
                     }
                     rowIndex++;
                 });
+        }
+
+        structure.forEach(unit => {
+            // Primary header (unit)
+            const unitY = margin.top + rowIndex * rowHeight;
+            const unitLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            unitLabel.setAttribute("x", margin.left - 12);
+            unitLabel.setAttribute("y", unitY + 14);
+            unitLabel.setAttribute("text-anchor", "end");
+            unitLabel.setAttribute("class", "label-primary");
+            unitLabel.textContent = unit.unitLabel;
+            svg.appendChild(unitLabel);
+            rowIndex++;
+
+            unit.initiatives.forEach(item => {
+                if (item.subgroup) {
+                    // Subgroup header (e.g. "Bistro" / "Tryn")
+                    const subY = margin.top + rowIndex * rowHeight;
+                    const subLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    subLabel.setAttribute("x", margin.left - 12);
+                    subLabel.setAttribute("y", subY + 14);
+                    subLabel.setAttribute("text-anchor", "end");
+                    subLabel.setAttribute("class", "label-subgroup");
+                    subLabel.textContent = item.subgroup;
+                    svg.appendChild(subLabel);
+                    rowIndex++;
+
+                    item.initiatives.forEach(initiative => renderInitiative(initiative, unit));
+                } else {
+                    renderInitiative(item, unit);
+                }
             });
 
             rowIndex += 0.5; // Spacing between units
         });
 
-        // Draw horizontal guide lines (from left margin to bars)
+        // Draw horizontal guide lines (from left margin to bars) — inserted behind the
+        // anchor comment node so they paint underneath every bar/marker, never on top.
         guideLines.forEach(guideLine => {
             const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
             line.setAttribute("x1", margin.left);
@@ -1035,7 +1100,7 @@
             line.setAttribute("x2", guideLine.endX);
             line.setAttribute("y2", guideLine.y);
             line.setAttribute("class", "guide-line");
-            svg.appendChild(line);
+            svg.insertBefore(line, firstBarAnchor);
         });
 
         svg.setAttribute("width", width);
