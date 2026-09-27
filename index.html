@@ -448,7 +448,7 @@
                     },
                     {
                         name: "Senior Managers Hotel Operations",
-                        participants: "Ffyona, Kamiela, Noleen, Shaun, Exec Housekeeper",
+                        participants: "Eben, Ffyona, Kamiela, Noleen, Shaun",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -456,13 +456,21 @@
                                 end: new Date(2026, 8, 10),
                                 startTime: "08:00",
                                 endTime: "11:00",
+                                venue: "Cuvee Room",
                                 scheduled: true
                             },
                             {
                                 name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
                                 start: new Date(2026, 8, 15),
                                 end: new Date(2026, 8, 15),
-                                scheduled: true
+                                venue: "Villa 25",
+                                scheduled: true,
+                                people: [
+                                    { name: "Eben", startTime: "10:00", endTime: "11:00" },
+                                    { name: "Ffyona", startTime: "11:30", endTime: "12:30" },
+                                    { name: "Kamiela", startTime: "13:00", endTime: "14:00" },
+                                    { name: "Shaun", startTime: "14:15", endTime: "15:15" }
+                                ]
                             },
                             {
                                 name: "Group Session 2 – Decision-making (3hrs)",
@@ -470,55 +478,73 @@
                                 end: new Date(2026, 8, 21),
                                 startTime: "08:00",
                                 endTime: "11:00",
+                                venue: "Cuvee Room",
                                 scheduled: true
                             },
                             {
                                 name: "1:1 Mentoring Round 2 – Indicators (1hr)",
-                                start: new Date(2026, 8, 22),
-                                end: new Date(2026, 8, 22),
-                                scheduled: true
+                                start: null,
+                                end: null,
+                                scheduled: false
                             }
                         ]
                     },
                     {
                         name: "Senior Managers Spa",
-                        participants: "Bennie, Quanita (Pinkie), Asst Spa Manager",
+                        participants: "Bennie, Danielle, Quanita (Pinkie)",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
-                                start: null,
-                                end: null,
-                                scheduled: false
+                                start: new Date(2026, 9, 9),
+                                end: new Date(2026, 9, 9),
+                                startTime: "10:00",
+                                endTime: "13:00",
+                                scheduled: true
                             },
                             {
                                 name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
-                                start: null,
-                                end: null,
-                                scheduled: false
+                                start: new Date(2026, 9, 15),
+                                end: new Date(2026, 9, 15),
+                                scheduled: true,
+                                people: [
+                                    { name: "Danielle", startTime: "09:00", endTime: "10:00" },
+                                    { name: "Bennie", startTime: "10:15", endTime: "11:15" },
+                                    { name: "Pinky", startTime: "11:30", endTime: "12:30" }
+                                ]
                             },
                             {
                                 name: "Group Session 2 – Decision-making (3hrs)",
-                                start: null,
-                                end: null,
-                                scheduled: false
+                                start: new Date(2026, 9, 16),
+                                end: new Date(2026, 9, 16),
+                                startTime: "13:00",
+                                endTime: "16:00",
+                                scheduled: true
                             },
                             {
                                 name: "1:1 Mentoring Round 2 – Indicators (1hr)",
-                                start: null,
-                                end: null,
-                                scheduled: false
+                                start: new Date(2026, 9, 23),
+                                end: new Date(2026, 9, 23),
+                                scheduled: true,
+                                people: [
+                                    { name: "Danielle", startTime: "09:00", endTime: "10:00" },
+                                    { name: "Bennie", startTime: "10:15", endTime: "11:15" },
+                                    { name: "Pinky", startTime: "11:30", endTime: "12:30" }
+                                ]
                             }
                         ]
                     },
                     {
                         name: "Senior Managers Support",
-                        participants: "Jeanine, Noleen, Rika, Ryno",
+                        participants: "Jeanine, Rika, Ryno",
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
-                                start: null,
-                                end: null,
-                                scheduled: false
+                                start: new Date(2026, 8, 28),
+                                end: new Date(2026, 8, 28),
+                                scheduled: true,
+                                people: [
+                                    { name: "Rika", startTime: "09:00", endTime: "09:50", venue: "Microsoft Teams" }
+                                ]
                             },
                             {
                                 name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
@@ -611,7 +637,7 @@
                                 instances: [
                                     { label: "Session 1", start: new Date(2026, 7, 19), end: new Date(2026, 7, 19), startTime: "14:00", endTime: "16:00", venue: "Ruby Room" },
                                     { label: "Session 2", start: new Date(2026, 7, 26), end: new Date(2026, 7, 26), startTime: "14:00", endTime: "16:00", venue: "Tryn" },
-                                    { label: "Session 3", start: new Date(2026, 8, 9), end: new Date(2026, 8, 9), startTime: "12:00", endTime: "14:00", venue: "Ruby Room" }
+                                    { label: "Session 3", start: new Date(2026, 8, 9), end: new Date(2026, 8, 9), startTime: "13:00", endTime: "15:00", venue: "Ruby Room" }
                                 ]
                             }
                         ]
@@ -757,7 +783,7 @@
                                 name: "3 Sessions (3hrs)",
                                 instances: [
                                     { label: "Session 1", start: new Date(2026, 7, 17), end: new Date(2026, 7, 17), startTime: "09:30", endTime: "12:30", venue: "Coach Building" },
-                                    { label: "Session 2", start: new Date(2026, 7, 26), end: new Date(2026, 7, 26), startTime: "09:00", endTime: "12:00", venue: "Coach Building" },
+                                    { label: "Session 2", start: new Date(2026, 7, 26), end: new Date(2026, 7, 26), startTime: "09:00", endTime: "12:30", venue: "Ruby Room" },
                                     { label: "Session 3", start: new Date(2026, 8, 9), end: new Date(2026, 8, 9), startTime: "08:30", endTime: "11:30", venue: "Coach Building" }
                                 ]
                             },
@@ -924,10 +950,13 @@
         }
 
         function getMarkerWidth(hours) {
-            if (hours === 1) return BASE_MARKER_WIDTH;
-            if (hours === 2) return BASE_MARKER_WIDTH * 2;
-            if (hours === 3) return BASE_MARKER_WIDTH * 3;
-            return null;
+            if (hours === null || hours <= 0) return null;
+            // Round to the nearest whole hour, capped at the 3hr bucket, so a
+            // slightly-over/under session (e.g. 3.5hrs) still reads as the closest
+            // marker size instead of falling through to the old same-day fallback
+            // width (which looks identical to a 1hr marker).
+            const bucket = Math.min(3, Math.max(1, Math.round(hours)));
+            return BASE_MARKER_WIDTH * bucket;
         }
 
         function isVenueConfirmed(venue) {
