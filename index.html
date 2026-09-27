@@ -539,12 +539,9 @@
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
-                                start: new Date(2026, 8, 28),
-                                end: new Date(2026, 8, 28),
-                                scheduled: true,
-                                people: [
-                                    { name: "Rika", startTime: "09:00", endTime: "09:50", venue: "Microsoft Teams" }
-                                ]
+                                start: null,
+                                end: null,
+                                scheduled: false
                             },
                             {
                                 name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
@@ -790,10 +787,11 @@
                             {
                                 name: "1:1 Round (1hr)",
                                 start: new Date(2026, 7, 21),
-                                end: new Date(2026, 7, 21),
+                                end: new Date(2026, 8, 28),
                                 scheduled: true,
                                 people: [
-                                    { name: "Anton", startTime: "09:00", endTime: "11:00", venue: "Microsoft Teams" }
+                                    { name: "Anton", startTime: "09:00", endTime: "11:00", venue: "Microsoft Teams" },
+                                    { name: "Rika", date: new Date(2026, 8, 28), startTime: "09:00", endTime: "09:50", venue: "Microsoft Teams" }
                                 ]
                             }
                         ]
