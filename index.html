@@ -499,31 +499,35 @@
                                 end: new Date(2026, 9, 9),
                                 startTime: "10:00",
                                 endTime: "13:00",
+                                venue: "Ruby Room",
                                 scheduled: true
                             },
                             {
                                 name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
                                 start: new Date(2026, 9, 15),
                                 end: new Date(2026, 9, 15),
+                                venue: "Hotel Room 025",
                                 scheduled: true,
                                 people: [
                                     { name: "Danielle", startTime: "09:00", endTime: "10:00" },
                                     { name: "Bennie", startTime: "10:15", endTime: "11:15" },
-                                    { name: "Pinky", startTime: "11:30", endTime: "12:30" }
+                                    { name: "Pinky", startTime: "13:00", endTime: "14:00" }
                                 ]
                             },
                             {
                                 name: "Group Session 2 – Decision-making (3hrs)",
                                 start: new Date(2026, 9, 16),
                                 end: new Date(2026, 9, 16),
-                                startTime: "13:00",
-                                endTime: "16:00",
+                                startTime: "09:00",
+                                endTime: "12:00",
+                                venue: "Cuvee",
                                 scheduled: true
                             },
                             {
                                 name: "1:1 Mentoring Round 2 – Indicators (1hr)",
                                 start: new Date(2026, 9, 23),
                                 end: new Date(2026, 9, 23),
+                                venue: "Hotel Room 025",
                                 scheduled: true,
                                 people: [
                                     { name: "Danielle", startTime: "09:00", endTime: "10:00" },
@@ -546,11 +550,12 @@
                             {
                                 name: "1:1 Mentoring Round 1 – Outcomes (1hr)",
                                 start: new Date(2026, 7, 17),
-                                end: new Date(2026, 7, 19),
+                                end: new Date(2026, 9, 8),
                                 scheduled: true,
                                 people: [
                                     { name: "Jeanine", date: new Date(2026, 7, 17), startTime: "15:00", endTime: "16:00", venue: "Ruby" },
-                                    { name: "Ryno", date: new Date(2026, 7, 19), startTime: "10:00", endTime: "11:00", venue: "Tryn" }
+                                    { name: "Ryno", date: new Date(2026, 7, 19), startTime: "10:00", endTime: "11:00", venue: "Tryn" },
+                                    { name: "Rika", date: new Date(2026, 9, 8), startTime: "11:30", endTime: "12:20" }
                                 ]
                             },
                             {
@@ -621,7 +626,14 @@
                         participants: "Natalie",
                         invoice: { number: 501, paid: "03-Jul" },
                         sessions: [
-                            { name: "3 Sessions (1hr)", start: null, end: null, scheduled: false }
+                            {
+                                name: "3 Sessions (1hr)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 10, 6), end: new Date(2026, 10, 6), startTime: "11:00", endTime: "12:00" },
+                                    { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00" },
+                                    { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00" }
+                                ]
+                            }
                         ]
                     },
                     {
@@ -662,11 +674,12 @@
                             },
                             {
                                 name: "Senior Team check-ins",
+                                participants: "Kerry",
                                 sessions: [
                                     {
                                         name: "3 Sessions (2hrs)",
                                         instances: [
-                                            { label: "Session 1", start: new Date(2026, 9, 1), end: new Date(2026, 9, 31) },
+                                            { label: "Session 1", start: new Date(2026, 9, 2), end: new Date(2026, 9, 2), startTime: "15:15", endTime: "16:00" },
                                             { label: "Session 2", start: new Date(2027, 2, 1), end: new Date(2027, 2, 31) },
                                             { label: "Session 3", start: new Date(2027, 5, 1), end: new Date(2027, 5, 30) }
                                         ]
@@ -750,7 +763,7 @@
                                 name: "6 Sessions (3hrs)",
                                 instances: [
                                     { label: "Session 1", start: new Date(2026, 7, 14), end: new Date(2026, 7, 14), startTime: "09:00", endTime: "12:00", venue: "Villa 25" },
-                                    { label: "Session 2", start: new Date(2026, 9, 16), end: new Date(2026, 9, 16), startTime: "09:00", endTime: "12:00", venue: "Tbc" },
+                                    { label: "Session 2", start: new Date(2026, 9, 16), end: new Date(2026, 9, 16), startTime: "13:00", endTime: "16:00", venue: "Cuvee" },
                                     { label: "Session 3", start: new Date(2026, 11, 4), end: new Date(2026, 11, 4), startTime: "09:00", endTime: "12:00", venue: "Tbc" },
                                     { label: "Session 4", start: new Date(2027, 1, 12), end: new Date(2027, 1, 12), startTime: "09:00", endTime: "12:00", venue: "Tbc" },
                                     { label: "Session 5", start: new Date(2027, 3, 9), end: new Date(2027, 3, 9), startTime: "09:00", endTime: "12:00", venue: "Tbc" },
