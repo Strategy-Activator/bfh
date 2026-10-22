@@ -347,6 +347,7 @@
                     {
                         name: "Senior Managers Restaurants BOH",
                         participants: "Mark, Penny",
+                        invoice: { number: "514 & 519", paid: "R191 665,90 + R79 734,10 (2 installments)" },
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -651,7 +652,7 @@
                     {
                         name: "New Starters Playbook Intro",
                         participants: "Emile, Imaan, Marisa, Piwe, Siwe",
-                        invoice: { number: 512, paid: null },
+                        invoice: { number: 512, paid: true },
                         sessions: [
                             {
                                 name: "3 Sessions (2hrs)",
@@ -745,7 +746,7 @@
                     {
                         name: "Coaching & Mentoring",
                         participants: "Monique",
-                        invoice: { number: 510, paid: null },
+                        invoice: { number: 510, paid: true },
                         sessions: [
                             {
                                 name: "12 Sessions (1hr)",
@@ -769,7 +770,7 @@
                     {
                         name: "Senior team update",
                         participants: "Bennie, Danielle, Quanita (Pinkie)",
-                        invoice: { number: 510, paid: null },
+                        invoice: { number: 510, paid: true },
                         sessions: [
                             {
                                 name: "6 Sessions (3hrs)",
@@ -911,7 +912,7 @@
                 trackLabelWidth(initiative.name, `${initWip ? "italic " : ""}600 12px ${FONT_FAMILY}`);
 
                 if (initiative.invoice) {
-                    const paidText = initiative.invoice.paid ? `Paid ${initiative.invoice.paid}` : "Not paid";
+                    const paidText = invoicePaidText(initiative.invoice.paid);
                     trackLabelWidth(`Invoice ${initiative.invoice.number} • ${paidText}`, `11px ${FONT_FAMILY}`);
                 }
                 if (initiative.participants) {
@@ -986,6 +987,15 @@
             if (!venue) return false;
             const v = venue.trim().toLowerCase();
             return v !== "" && v !== "tbc" && v !== "tbd" && v !== "tba";
+        }
+
+        // Builds the "Paid ..." / "Not paid" invoice label. `paid` is usually a date
+        // string (e.g. "16-Jul"), but some invoices are only confirmed as paid with
+        // no further detail (amount/date) — for those, `paid: true` renders as a
+        // bare "Paid" rather than the literal string "Paid true".
+        function invoicePaidText(paid) {
+            if (!paid) return "Not paid";
+            return paid === true ? "Paid" : `Paid ${paid}`;
         }
 
         // Draw only month separators (vertical lines)
@@ -1089,7 +1099,7 @@
                     invLabel.setAttribute("y", invY + 14);
                     invLabel.setAttribute("text-anchor", "end");
                     invLabel.setAttribute("class", `label-invoice ${initiative.invoice.paid ? "paid" : "unpaid"}`);
-                    const paidText = initiative.invoice.paid ? `Paid ${initiative.invoice.paid}` : "Not paid";
+                    const paidText = invoicePaidText(initiative.invoice.paid);
                     invLabel.textContent = `Invoice ${initiative.invoice.number} • ${paidText}`;
                     svg.appendChild(invLabel);
                     rowIndex++;
