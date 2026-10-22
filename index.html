@@ -343,11 +343,11 @@
             {
                 unit: "group",
                 unitLabel: "Group",
+                invoice: { number: "514 & 519", paid: "R191 665,90 + R79 734,10 (2 installments)" },
                 initiatives: [
                     {
                         name: "Senior Managers Restaurants BOH",
                         participants: "Mark, Penny",
-                        invoice: { number: "514 & 519", paid: "R191 665,90 + R79 734,10 (2 installments)" },
                         sessions: [
                             {
                                 name: "Group Session 1 – Psychological Safety (3hrs)",
@@ -882,6 +882,7 @@
         let totalRows = 0;
         structure.forEach(unit => {
             totalRows++; // unit header
+            if (unit.invoice) totalRows++; // unit-level invoice row if exists
             walkInitiatives(unit.initiatives, initiative => {
                 totalRows++; // initiative header
                 if (initiative.invoice) totalRows++; // invoice row if exists
@@ -906,6 +907,10 @@
         }
         structure.forEach(unit => {
             trackLabelWidth(unit.unitLabel.toUpperCase(), `700 13px ${FONT_FAMILY}`);
+            if (unit.invoice) {
+                const unitPaidText = invoicePaidText(unit.invoice.paid);
+                trackLabelWidth(`Invoice ${unit.invoice.number} • ${unitPaidText}`, `11px ${FONT_FAMILY}`);
+            }
             walkInitiatives(unit.initiatives, initiative => {
                 const scheduledCount = initiative.sessions.filter(s => s.scheduled || (s.instances && s.instances.length > 0)).length;
                 const initWip = scheduledCount > 0 && scheduledCount < initiative.sessions.length;
@@ -1236,6 +1241,22 @@
             unitLabel.textContent = unit.unitLabel;
             svg.appendChild(unitLabel);
             rowIndex++;
+
+            // Display unit-level invoice/payment status if it exists (e.g. one invoice
+            // covering the whole Group Senior Manager Playbook training programme,
+            // rather than being tied to a single initiative underneath it)
+            if (unit.invoice) {
+                const unitInvY = margin.top + rowIndex * rowHeight;
+                const unitInvLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                unitInvLabel.setAttribute("x", margin.left - 12);
+                unitInvLabel.setAttribute("y", unitInvY + 14);
+                unitInvLabel.setAttribute("text-anchor", "end");
+                unitInvLabel.setAttribute("class", `label-invoice ${unit.invoice.paid ? "paid" : "unpaid"}`);
+                const unitPaidText = invoicePaidText(unit.invoice.paid);
+                unitInvLabel.textContent = `Invoice ${unit.invoice.number} • ${unitPaidText}`;
+                svg.appendChild(unitInvLabel);
+                rowIndex++;
+            }
 
             unit.initiatives.forEach(item => {
                 if (item.subgroup) {
