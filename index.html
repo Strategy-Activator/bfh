@@ -595,38 +595,33 @@
                 unitLabel: "Hotel",
                 initiatives: [
                     {
-                        subgroup: "Coaching & Mentoring",
-                        initiatives: [
+                        name: "Coaching & Mentoring",
+                        participants: "Natalie",
+                        invoice: { number: 506, paid: "16-Jul" },
+                        sessions: [
                             {
-                                name: "Hotel Operations Manager coaching",
-                                participants: "Natalie",
-                                invoice: { number: 506, paid: "16-Jul" },
-                                sessions: [
-                                    {
-                                        name: "Round 1 – 4 Sessions (1hr)",
-                                        instances: [
-                                            { label: "Session 1", start: new Date(2026, 8, 25), end: new Date(2026, 8, 25), startTime: "12:00", endTime: "13:00", venue: "Cuvee" },
-                                            { label: "Session 2", start: new Date(2026, 9, 23), end: new Date(2026, 9, 23), startTime: "13:00", endTime: "14:00" }
-                                        ]
-                                    },
-                                    { name: "Round 2 – 9 Sessions (1hr)", start: null, end: null, scheduled: false }
+                                name: "Round 1 – 4 Sessions (1hr)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 8, 25), end: new Date(2026, 8, 25), startTime: "12:00", endTime: "13:00", venue: "Cuvee" },
+                                    { label: "Session 2", start: new Date(2026, 9, 23), end: new Date(2026, 9, 23), startTime: "13:00", endTime: "14:00" }
                                 ]
                             },
+                            { name: "Round 2 – 9 Sessions (1hr)", start: null, end: null, scheduled: false }
+                        ]
+                    },
+                    {
+                        name: "Coaching & Mentoring",
+                        participants: "Hein",
+                        invoice: { number: 502, paid: "10-Jul" },
+                        sessions: [
                             {
-                                name: "Revenue Manager coaching",
-                                participants: "Hein",
-                                invoice: { number: 502, paid: "10-Jul" },
-                                sessions: [
-                                    {
-                                        name: "5 Sessions (1hr)",
-                                        instances: [
-                                            { label: "Session 1", start: new Date(2026, 8, 11), end: new Date(2026, 8, 11), startTime: "13:00", endTime: "14:00", venue: "Ruby" },
-                                            { label: "Session 2", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "12:30", endTime: "13:30" },
-                                            { label: "Session 3", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "12:30", endTime: "13:30", venue: "Tbc" },
-                                            { label: "Session 4", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "09:30", endTime: "10:30", venue: "Tbc" },
-                                            { label: "Session 5", start: new Date(2026, 11, 7), end: new Date(2026, 11, 7), startTime: "15:30", endTime: "16:30" }
-                                        ]
-                                    }
+                                name: "5 Sessions (1hr)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 8, 11), end: new Date(2026, 8, 11), startTime: "13:00", endTime: "14:00", venue: "Ruby" },
+                                    { label: "Session 2", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "12:30", endTime: "13:30" },
+                                    { label: "Session 3", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "12:30", endTime: "13:30", venue: "Tbc" },
+                                    { label: "Session 4", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "09:30", endTime: "10:30", venue: "Tbc" },
+                                    { label: "Session 5", start: new Date(2026, 11, 7), end: new Date(2026, 11, 7), startTime: "15:30", endTime: "16:30" }
                                 ]
                             }
                         ]
@@ -644,31 +639,28 @@
                 unitLabel: "Restaurants",
                 initiatives: [
                     {
-                        subgroup: "Coaching & Mentoring",
-                        initiatives: [
+                        name: "Coaching & Mentoring",
+                        participants: "Kerry",
+                        sessions: [
                             {
-                                name: "Kerry",
-                                sessions: [
-                                    {
-                                        name: "Sessions (1hr)",
-                                        instances: [
-                                            { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "09:00", endTime: "10:00", venue: "Tryn" }
-                                        ]
-                                    }
+                                name: "Sessions (1hr)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "09:00", endTime: "10:00", venue: "Tryn" }
                                 ]
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        name: "Coaching & Mentoring",
+                        participants: "Natalie",
+                        invoice: { number: 501, paid: "03-Jul" },
+                        sessions: [
                             {
-                                name: "Natalie",
-                                invoice: { number: 501, paid: "03-Jul" },
-                                sessions: [
-                                    {
-                                        name: "3 Sessions (1hr)",
-                                        instances: [
-                                            { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "10:30", endTime: "11:30", venue: "Tryn" },
-                                            { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00", venue: "Tryn" },
-                                            { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00", venue: "Tryn" }
-                                        ]
-                                    }
+                                name: "3 Sessions (1hr)",
+                                instances: [
+                                    { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "10:30", endTime: "11:30", venue: "Tryn" },
+                                    { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00", venue: "Tryn" },
+                                    { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00", venue: "Tryn" }
                                 ]
                             }
                         ]
@@ -1123,7 +1115,20 @@
                 svg.appendChild(initLabel);
                 rowIndex++;
 
-                // Display invoice/payment status if it exists (shown above participants)
+                // Display participants if they exist (shown above the invoice)
+                if (initiative.participants) {
+                    const particY = margin.top + rowIndex * rowHeight;
+                    const particLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    particLabel.setAttribute("x", margin.left - 12);
+                    particLabel.setAttribute("y", particY + 14);
+                    particLabel.setAttribute("text-anchor", "end");
+                    particLabel.setAttribute("class", "label-participants");
+                    particLabel.textContent = initiative.participants;
+                    svg.appendChild(particLabel);
+                    rowIndex++;
+                }
+
+                // Display invoice/payment status if it exists
                 if (initiative.invoice) {
                     const invY = margin.top + rowIndex * rowHeight;
                     const invLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -1134,19 +1139,6 @@
                     const paidText = invoicePaidText(initiative.invoice.paid);
                     invLabel.textContent = `Invoice ${initiative.invoice.number} • ${paidText}`;
                     svg.appendChild(invLabel);
-                    rowIndex++;
-                }
-
-                // Display participants if they exist
-                if (initiative.participants) {
-                    const particY = margin.top + rowIndex * rowHeight;
-                    const particLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                    particLabel.setAttribute("x", margin.left - 12);
-                    particLabel.setAttribute("y", particY + 14);
-                    particLabel.setAttribute("text-anchor", "end");
-                    particLabel.setAttribute("class", "label-participants");
-                    particLabel.textContent = initiative.participants;
-                    svg.appendChild(particLabel);
                     rowIndex++;
                 }
 
