@@ -639,28 +639,31 @@
                 unitLabel: "Restaurants",
                 initiatives: [
                     {
-                        name: "Restaurant Manager coaching",
-                        participants: "Natalie",
-                        invoice: { number: 501, paid: "03-Jul" },
-                        sessions: [
+                        subgroup: "Coaching & Mentoring",
+                        initiatives: [
                             {
-                                name: "3 Sessions (1hr)",
-                                instances: [
-                                    { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "10:30", endTime: "11:30" },
-                                    { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00" },
-                                    { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00" }
+                                name: "Kerry",
+                                sessions: [
+                                    {
+                                        name: "Sessions (1hr)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "09:00", endTime: "10:00", venue: "Tryn" }
+                                        ]
+                                    }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        name: "Individual coaching",
-                        participants: "Kerry",
-                        sessions: [
+                            },
                             {
-                                name: "Sessions (1hr)",
-                                instances: [
-                                    { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "09:00", endTime: "10:00", venue: "Tryn" }
+                                name: "Natalie",
+                                invoice: { number: 501, paid: "03-Jul" },
+                                sessions: [
+                                    {
+                                        name: "3 Sessions (1hr)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "10:30", endTime: "11:30" },
+                                            { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00" },
+                                            { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00" }
+                                        ]
+                                    }
                                 ]
                             }
                         ]
