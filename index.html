@@ -659,9 +659,9 @@
                                     {
                                         name: "3 Sessions (1hr)",
                                         instances: [
-                                            { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "10:30", endTime: "11:30" },
-                                            { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00" },
-                                            { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00" }
+                                            { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "10:30", endTime: "11:30", venue: "Tryn" },
+                                            { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00", venue: "Tryn" },
+                                            { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00", venue: "Tryn" }
                                         ]
                                     }
                                 ]
@@ -833,11 +833,13 @@
                             {
                                 name: "1:1 Round (1hr)",
                                 start: new Date(2026, 7, 21),
-                                end: new Date(2026, 8, 28),
+                                end: new Date(2026, 10, 19),
                                 scheduled: true,
                                 people: [
                                     { name: "Anton", startTime: "09:00", endTime: "11:00", venue: "Microsoft Teams" },
-                                    { name: "Rika", date: new Date(2026, 8, 28), startTime: "09:00", endTime: "09:50", venue: "Microsoft Teams" }
+                                    { name: "Rika", date: new Date(2026, 8, 28), startTime: "09:00", endTime: "09:50", venue: "Microsoft Teams" },
+                                    { name: "Ffyona", date: new Date(2026, 10, 13), startTime: "14:30", endTime: "15:30" },
+                                    { name: "Ryno", date: new Date(2026, 10, 19), startTime: "10:00", endTime: "11:00" }
                                 ]
                             }
                         ]
