@@ -595,33 +595,36 @@
                 unitLabel: "Hotel",
                 initiatives: [
                     {
-                        name: "Coaching & Mentoring",
-                        participants: "Natalie",
-                        invoice: { number: 506, paid: "16-Jul" },
-                        sessions: [
+                        subgroup: "Coaching & Mentoring",
+                        initiatives: [
                             {
-                                name: "Round 1 – 4 Sessions (1hr)",
-                                instances: [
-                                    { label: "Session 1", start: new Date(2026, 8, 25), end: new Date(2026, 8, 25), startTime: "12:00", endTime: "13:00", venue: "Cuvee" },
-                                    { label: "Session 2", start: new Date(2026, 9, 23), end: new Date(2026, 9, 23), startTime: "13:00", endTime: "14:00" }
+                                participants: "Natalie",
+                                invoice: { number: 506, paid: "16-Jul" },
+                                sessions: [
+                                    {
+                                        name: "Round 1 – 4 Sessions (1hr)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 8, 25), end: new Date(2026, 8, 25), startTime: "12:00", endTime: "13:00", venue: "Cuvee" },
+                                            { label: "Session 2", start: new Date(2026, 9, 23), end: new Date(2026, 9, 23), startTime: "13:00", endTime: "14:00" }
+                                        ]
+                                    },
+                                    { name: "Round 2 – 9 Sessions (1hr)", start: null, end: null, scheduled: false }
                                 ]
                             },
-                            { name: "Round 2 – 9 Sessions (1hr)", start: null, end: null, scheduled: false }
-                        ]
-                    },
-                    {
-                        name: "Coaching & Mentoring",
-                        participants: "Hein",
-                        invoice: { number: 502, paid: "10-Jul" },
-                        sessions: [
                             {
-                                name: "5 Sessions (1hr)",
-                                instances: [
-                                    { label: "Session 1", start: new Date(2026, 8, 11), end: new Date(2026, 8, 11), startTime: "13:00", endTime: "14:00", venue: "Ruby" },
-                                    { label: "Session 2", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "12:30", endTime: "13:30" },
-                                    { label: "Session 3", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "12:30", endTime: "13:30", venue: "Tbc" },
-                                    { label: "Session 4", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "09:30", endTime: "10:30", venue: "Tbc" },
-                                    { label: "Session 5", start: new Date(2026, 11, 7), end: new Date(2026, 11, 7), startTime: "15:30", endTime: "16:30" }
+                                participants: "Hein",
+                                invoice: { number: 502, paid: "10-Jul" },
+                                sessions: [
+                                    {
+                                        name: "5 Sessions (1hr)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 8, 11), end: new Date(2026, 8, 11), startTime: "13:00", endTime: "14:00", venue: "Ruby" },
+                                            { label: "Session 2", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "12:30", endTime: "13:30" },
+                                            { label: "Session 3", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "12:30", endTime: "13:30", venue: "Tbc" },
+                                            { label: "Session 4", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "09:30", endTime: "10:30", venue: "Tbc" },
+                                            { label: "Session 5", start: new Date(2026, 11, 7), end: new Date(2026, 11, 7), startTime: "15:30", endTime: "16:30" }
+                                        ]
+                                    }
                                 ]
                             }
                         ]
@@ -639,28 +642,31 @@
                 unitLabel: "Restaurants",
                 initiatives: [
                     {
-                        name: "Coaching & Mentoring",
-                        participants: "Kerry",
-                        sessions: [
+                        subgroup: "Coaching & Mentoring",
+                        initiatives: [
                             {
-                                name: "Sessions (1hr)",
-                                instances: [
-                                    { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "09:00", endTime: "10:00", venue: "Tryn" }
+                                participants: "Kerry",
+                                sessions: [
+                                    {
+                                        name: "Sessions (1hr)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "09:00", endTime: "10:00", venue: "Tryn" }
+                                        ]
+                                    }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        name: "Coaching & Mentoring",
-                        participants: "Natalie",
-                        invoice: { number: 501, paid: "03-Jul" },
-                        sessions: [
+                            },
                             {
-                                name: "3 Sessions (1hr)",
-                                instances: [
-                                    { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "10:30", endTime: "11:30", venue: "Tryn" },
-                                    { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00", venue: "Tryn" },
-                                    { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00", venue: "Tryn" }
+                                participants: "Natalie",
+                                invoice: { number: 501, paid: "03-Jul" },
+                                sessions: [
+                                    {
+                                        name: "3 Sessions (1hr)",
+                                        instances: [
+                                            { label: "Session 1", start: new Date(2026, 10, 9), end: new Date(2026, 10, 9), startTime: "10:30", endTime: "11:30", venue: "Tryn" },
+                                            { label: "Session 2", start: new Date(2026, 10, 13), end: new Date(2026, 10, 13), startTime: "11:00", endTime: "12:00", venue: "Tryn" },
+                                            { label: "Session 3", start: new Date(2026, 10, 30), end: new Date(2026, 10, 30), startTime: "11:00", endTime: "12:00", venue: "Tryn" }
+                                        ]
+                                    }
                                 ]
                             }
                         ]
@@ -903,7 +909,7 @@
             totalRows++; // unit header
             if (unit.invoice) totalRows++; // unit-level invoice row if exists
             walkInitiatives(unit.initiatives, initiative => {
-                totalRows++; // initiative header
+                if (initiative.name) totalRows++; // initiative header (omitted when a subgroup header already covers it)
                 if (initiative.invoice) totalRows++; // invoice row if exists
                 if (initiative.participants) totalRows++; // participants row if exists
                 totalRows += initiative.sessions.length; // sessions
@@ -933,7 +939,9 @@
             walkInitiatives(unit.initiatives, initiative => {
                 const scheduledCount = initiative.sessions.filter(s => s.scheduled || (s.instances && s.instances.length > 0)).length;
                 const initWip = scheduledCount > 0 && scheduledCount < initiative.sessions.length;
-                trackLabelWidth(initiative.name, `${initWip ? "italic " : ""}600 12px ${FONT_FAMILY}`);
+                if (initiative.name) {
+                    trackLabelWidth(initiative.name, `${initWip ? "italic " : ""}600 12px ${FONT_FAMILY}`);
+                }
 
                 if (initiative.invoice) {
                     const paidText = invoicePaidText(initiative.invoice.paid);
@@ -1098,22 +1106,26 @@
         // Shared by top-level initiatives and initiatives nested under a subgroup
         // (e.g. Restaurants > Bistro), so both render identically.
         function renderInitiative(initiative, unit) {
-                // Secondary header (initiative)
-                const initY = margin.top + rowIndex * rowHeight;
-                const initLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                initLabel.setAttribute("x", margin.left - 12);
-                initLabel.setAttribute("y", initY + 14);
-                initLabel.setAttribute("text-anchor", "end");
-
                 // Determine scheduling status: work-in-progress if some (but not all) sessions are scheduled.
                 // A session counts as scheduled if it's flagged directly, or if it's a condensed
                 // row with dated instances (those don't set session.scheduled at the top level).
                 const scheduledCount = initiative.sessions.filter(s => s.scheduled || (s.instances && s.instances.length > 0)).length;
                 const isWip = scheduledCount > 0 && scheduledCount < initiative.sessions.length;
-                initLabel.setAttribute("class", isWip ? "label-secondary-wip" : "label-secondary");
-                initLabel.textContent = initiative.name;
-                svg.appendChild(initLabel);
-                rowIndex++;
+
+                // Secondary header (initiative) — omitted when the initiative has no name of its
+                // own (e.g. several coachees grouped under one subgroup header like "Coaching &
+                // Mentoring"), so that shared header isn't repeated for every line item under it.
+                if (initiative.name) {
+                    const initY = margin.top + rowIndex * rowHeight;
+                    const initLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    initLabel.setAttribute("x", margin.left - 12);
+                    initLabel.setAttribute("y", initY + 14);
+                    initLabel.setAttribute("text-anchor", "end");
+                    initLabel.setAttribute("class", isWip ? "label-secondary-wip" : "label-secondary");
+                    initLabel.textContent = initiative.name;
+                    svg.appendChild(initLabel);
+                    rowIndex++;
+                }
 
                 // Display participants if they exist (shown above the invoice)
                 if (initiative.participants) {
