@@ -746,7 +746,7 @@
                             },
                             {
                                 name: "Senior Team check-ins",
-                                participants: "Mark & Kerry, Luis & Natalie",
+                                participants: "Mark & Kerry, Lius & Natalie",
                                 sessions: [
                                     {
                                         name: "3-way Sessions (1hr)",
@@ -1208,7 +1208,8 @@
                                 startTime: instance.startTime,
                                 endTime: instance.endTime,
                                 venue: instance.venue,
-                                scheduled: true
+                                scheduled: true,
+                                participants: initiative.participants
                             };
                             bar.addEventListener("mouseover", (e) => showTooltip(e, instanceSession));
                             bar.addEventListener("mouseout", hideTooltip);
@@ -1252,7 +1253,7 @@
                         bar.setAttribute("height", 14);
                         bar.setAttribute("class", `bar ${unit.unit}${venueConfirmed ? "" : " venue-tbc"}${isCompleted ? " completed" : ""}`);
 
-                        bar.addEventListener("mouseover", (e) => showTooltip(e, session));
+                        bar.addEventListener("mouseover", (e) => showTooltip(e, { ...session, participants: initiative.participants }));
                         bar.addEventListener("mouseout", hideTooltip);
 
                         svg.appendChild(bar);
@@ -1363,7 +1364,8 @@
                     }
                 });
             } else {
-                tooltipText = `${baseName} • ${startStr}`;
+                tooltipText = session.participants ? `${baseName} • ${session.participants}` : baseName;
+                tooltipText += ` • ${startStr}`;
                 if (session.startTime && session.startTime !== "TBD") {
                     tooltipText += ` • ${session.startTime}–${session.endTime}`;
                 }
