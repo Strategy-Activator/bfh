@@ -1199,6 +1199,13 @@
                             bar.setAttribute("height", 14);
                             bar.setAttribute("class", `bar ${unit.unit}${venueConfirmed ? "" : " venue-tbc"}${isCompleted ? " completed" : ""}`);
 
+                            // When the instance's own label already names one specific person (e.g.
+                            // each bar in a 1:1 round is that person's own slot), showing the initiative's
+                            // full participant list on every bar is confusing -- the label alone already
+                            // says who it's for. Only attach the full list when the label isn't one
+                            // individual name from that list (e.g. a shared "Session 1" row for the group).
+                            const participantNames = (initiative.participants || "").split(",").map(s => s.trim());
+                            const labelIsIndividual = instance.label && participantNames.includes(instance.label);
                             const instanceSession = {
                                 name: instance.label || session.name,
                                 start: instance.start,
@@ -1207,7 +1214,7 @@
                                 endTime: instance.endTime,
                                 venue: instance.venue,
                                 scheduled: true,
-                                participants: initiative.participants
+                                participants: labelIsIndividual ? undefined : initiative.participants
                             };
                             bar.addEventListener("mouseover", (e) => showTooltip(e, instanceSession));
                             bar.addEventListener("mouseout", hideTooltip);
